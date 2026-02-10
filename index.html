@@ -148,9 +148,17 @@ function toggleCart(){
 }
 
 function confirmOrder(){
-  if(!name.value || !phone.value || !address.value){
+  const cname = document.getElementById('name').value.trim();
+  const cphone = document.getElementById('phone').value.trim();
+  const caddress = document.getElementById('address').value.trim();
+  if(!cname || !cphone || !caddress){
     alert('Please fill customer details'); return;
   }
+  if(Object.keys(cart).length===0){
+    alert('Cart is empty'); return;
+  }
+  sendWhatsApp(cname,cphone,caddress);
+}
   if(Object.keys(cart).length===0){
     alert('Cart is empty'); return;
   }
@@ -165,9 +173,37 @@ function confirmOrder(){
   window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
 }
 function downloadInvoice(){
-  if(!name.value || !phone.value || !address.value){
+  const cname = document.getElementById('name').value.trim();
+  const cphone = document.getElementById('phone').value.trim();
+  const caddress = document.getElementById('address').value.trim();
+  if(!cname || !cphone || !caddress){
     alert('Please fill customer details'); return;
   }
+  if(Object.keys(cart).length===0){
+    alert('Cart is empty'); return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  let y = 10;
+  doc.setFontSize(14);
+  doc.text('Mankhush Home Delights',10,y); y+=8;
+  doc.setFontSize(11);
+  doc.text('Customer: '+cname,10,y); y+=6;
+  doc.text('Phone: '+cphone,10,y); y+=6;
+  doc.text('Address: '+caddress,10,y); y+=8;
+  doc.text('Items:',10,y); y+=6;
+  let total=0;
+  for(const i in cart){
+    const amt = cart[i].qty*cart[i].price;
+    total+=amt;
+    doc.text(`${i} | Qty ${cart[i].qty} | ₹${amt}`,10,y);
+    y+=6;
+  }
+  y+=4;
+  doc.text('Total Amount: ₹'+total,10,y);
+  doc.save('invoice.pdf');
+  sendWhatsApp(cname,cphone,caddress);
+}
   if(Object.keys(cart).length===0){
     alert('Cart is empty'); return;
   }
@@ -217,18 +253,28 @@ function downloadInvoice(){
   doc.text('Total Amount: ₹'+total,10,y);
   doc.save('invoice.pdf');
 }
-function sendWhatsApp(){
+function sendWhatsApp(cname,cphone,caddress){
   let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
-  msg += 'Customer: '+name.value+'\n';
-  msg += 'Phone: '+phone.value+'\n';
-  msg += 'Address: '+address.value+'\n\nItems:\n';
+  msg += 'Customer: '+cname+'\n';
+  msg += 'Phone: '+cphone+'\n';
+  msg += 'Address: '+caddress+'\n\nItems:\n';
   let total=0;
   for(const i in cart){
     const amt = cart[i].qty * cart[i].price;
     total+=amt;
     msg += `${i} - Qty ${cart[i].qty}, Amount ₹${amt}\n`;
   }
-  msg += '\nTotal: ₹'+total+'\nOrder Confirmed & Paym
+  msg += '\nTotal: ₹'+total+'\nOrder Confirmed & Payment Received';
+  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
+} - Qty ${cart[i].qty}, Amount ₹${amt}
+`;
+  }
+  msg += '
+Total: ₹'+total+'
+Order Confirmed & Payment Received';
+  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
