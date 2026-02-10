@@ -203,7 +203,7 @@ function sendWhatsApp(name, phone, address){
     total += amt;
     msg += `${i} - Qty ${cart[i].qty} - ₹${amt}\n`;
   }
-  msg += `\nTotal: ₹${total}\n\nPayment screenshot attached in this chat.`;
+ msg += `\nTotal: ₹${total}\n\nIMPORTANT:\nPlease attach the payment screenshot here before sending this message.`;
   window.open('https://wa.me/918209520964?text=' + encodeURIComponent(msg), '_blank');
 }
 </script>
