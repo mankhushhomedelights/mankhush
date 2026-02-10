@@ -41,7 +41,7 @@ button.clear{background:#999}
 <header>
   <h1>Mankhush Home Delights — Pure Veg Banarasi Taste</h1>
   <p>For your next big event be it kitty party, birthday or any casual get together.<br>Please give 1 day advance order.</p>
-  <p>Delivery available on actual rates by Rapido Riders</p>
+  <p>Delivery available on actual rates by Rapido Riders / Courier Services</p>
   <p style="font-size:11px;opacity:.9">By Shivangi Srivastava</p>
 </header>
 
@@ -100,9 +100,10 @@ button.clear{background:#999}
   <div class="cart-header">
   <h3>Order Summary</h3>
   <div>
-    <span onclick="toggleCart()" style="margin-right:8px">–</span>
-    <span onclick="toggleCart()">×</span>
+    <span onclick="minimiseCart()" style="margin-right:8px;cursor:pointer">–</span>
+    <span onclick="closeCart()" style="cursor:pointer">×</span>
   </div>
+</div>
 </div>
   <div id="cartItems"></div>
   <strong>Total ₹ <span id="total">0</span></strong>
@@ -156,11 +157,19 @@ function renderCart(){
   document.getElementById('total').innerText = total;
 }
 
+function minimiseCart(){
+  document.getElementById('cart').classList.remove('open');
+}
+
+function closeCart(){
+  cart = {};
+  renderCart();
+  document.getElementById('cart').classList.remove('open');
+}
+
 function toggleCart(){
-  const cartEl = document.getElementById('cart');
-  if(cartEl.classList.contains('open')){
-    // closing cart → clear cart
-    cart = {};
+  document.getElementById('cart').classList.toggle('open');
+};
     renderCart();
     cartEl.classList.remove('open');
   } else {
