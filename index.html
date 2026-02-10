@@ -19,7 +19,7 @@ button{background:#ff6b00;color:#fff;border:none;padding:5px 8px;border-radius:6
 
 .cart-btn{position:fixed;bottom:12px;right:12px;background:#ff6b00;color:#fff;padding:10px 14px;border-radius:24px;font-size:14px;cursor:pointer;z-index:1000}
 
-.cart-popup{position:fixed;left:0;right:0;bottom:0;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -3px 12px rgba(0,0,0,.25);padding:14px;max-height:80vh;overflow:auto;display:none;z-index:1001}
+.cart-popup{position:fixed;left:50%;transform:translateX(-50%);bottom:8px;background:#fff;border-radius:14px;box-shadow:0 -2px 10px rgba(0,0,0,.2);padding:10px;max-width:420px;width:92%;max-height:55vh;overflow:auto;display:none;z-index:1001}
 .cart-item{display:flex;justify-content:space-between;margin:6px 0;font-size:13px}
 .small{font-size:12px;color:#666}
 input,textarea{width:100%;padding:7px;margin-top:6px;border-radius:6px;border:1px solid #ccc;font-size:13px}
@@ -63,11 +63,11 @@ input,textarea{width:100%;padding:7px;margin-top:6px;border-radius:6px;border:1p
 <div class="cart-btn" onclick="toggleCart()">🛒 Cart</div>
 
 <div class="cart-popup" id="cartPopup">
-  <h3>Invoice</h3>
+  <h3 style="margin:4px 0;font-size:16px">Invoice</h3>
   <div id="cartItems"></div>
-  <h4>Total ₹ <span id="total">0</span></h4>
+  <h4 style="margin:6px 0;font-size:14px">Total ₹ <span id="total">0</span></h4>
 
-  <h4>Customer Details</h4>
+  <h4 style="margin:6px 0;font-size:14px">Customer Details</h4>
   <input id="custName" placeholder="Full Name">
   <input id="custPhone" placeholder="Phone Number">
   <textarea id="custAddr" placeholder="Delivery Address"></textarea>
