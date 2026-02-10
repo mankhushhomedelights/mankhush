@@ -5,28 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mankhush Home Delights</title>
 <style>
-body{margin:0;font-family:Arial;background:#fff7f0}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff7f0}
 header{background:#ff6b00;color:#fff;text-align:center;padding:14px;font-size:20px;font-weight:bold}
 
-.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:700px;margin:auto}
-@media(max-width:700px){.menu{grid-template-columns:1fr}}
-
-.card{background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:6px;text-align:center}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:14px;max-width:700px;margin:auto}
+.card{background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:8px;text-align:center}
 .card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;max-height:120px}
 .card h3{margin:6px 0 2px;font-size:14px}
 .card p{margin:0;font-size:13px}
-button{background:#ff6b00;color:#fff;border:none;padding:5px 8px;border-radius:6px;cursor:pointer;margin-top:5px;font-size:13px}
+.qty{display:flex;justify-content:center;gap:8px;margin-top:6px}
+.qty button{padding:4px 10px;font-size:14px;border:none;border-radius:6px;background:#ff6b00;color:#fff;cursor:pointer}
 
-.cart-btn{position:fixed;bottom:12px;right:12px;background:#ff6b00;color:#fff;padding:10px 14px;border-radius:24px;font-size:14px;cursor:pointer;z-index:1000}
+.cart-btn{position:fixed;bottom:12px;right:12px;background:#ff6b00;color:#fff;padding:10px 14px;border-radius:22px;font-size:14px;cursor:pointer;z-index:1000}
 
-.cart-popup{position:fixed;right:8px;left:auto;transform:none;bottom:8px;background:#fff;border-radius:14px;box-shadow:0 -2px 10px rgba(0,0,0,.2);padding:10px;max-width:420px;width:92%;max-height:55vh;overflow:auto;display:none;z-index:1001}
-.cart-item{display:flex;justify-content:space-between;margin:6px 0;font-size:13px}
-.small{font-size:12px;color:#666}
+.cart{position:fixed;bottom:12px;right:12px;background:#fff;border-radius:14px;box-shadow:0 -2px 10px rgba(0,0,0,.25);width:360px;max-height:55vh;overflow:auto;padding:12px;display:none;z-index:1001}
+.cart h3{margin:4px 0 6px;font-size:16px}
+.cart-item{display:flex;justify-content:space-between;font-size:13px;margin:6px 0}
 input,textarea{width:100%;padding:7px;margin-top:6px;border-radius:6px;border:1px solid #ccc;font-size:13px}
-
-.footer{padding:24px;text-align:center}
-.footer .logos{display:flex;justify-content:center;gap:30px;margin-top:10px}
-.footer img{height:36px;opacity:0.5}
+button.action{width:100%;margin-top:8px;padding:8px;border:none;border-radius:8px;background:#ff6b00;color:#fff;font-size:14px;cursor:pointer}
+.small{font-size:12px;color:#666}
+.footer{text-align:center;padding:20px}
+.footer img{height:36px;opacity:.5;margin:0 12px}
 </style>
 </head>
 <body>
@@ -35,139 +34,133 @@ input,textarea{width:100%;padding:7px;margin-top:6px;border-radius:6px;border:1p
 
 <div class="menu">
   <div class="card">
-    <img src="gujiya.jpg"><h3>Desi Ghee Gujiya</h3><p>₹800 / KG</p>
-    <div><button onclick="decreaseItem('Gujiya')">−</button> <button onclick="addToCart('Gujiya',800)">+</button></div>
+    <img src="gujiya.jpg">
+    <h3>Desi Ghee Gujiya</h3>
+    <p>₹800 / KG</p>
+    <div class="qty">
+      <button onclick="removeItem('Gujiya')">−</button>
+      <button onclick="addItem('Gujiya',800)">+</button>
+    </div>
   </div>
+
   <div class="card">
-    <img src="thandai.jpg"><h3>Premium Holi Thandai</h3><p>₹100 / Glass</p>
-    <div><button onclick="decreaseItem('Thandai')">−</button> <button onclick="addToCart('Thandai',100)">+</button></div>
+    <img src="thandai.jpg">
+    <h3>Premium Holi Thandai</h3>
+    <p>₹100 / Glass</p>
+    <div class="qty">
+      <button onclick="removeItem('Thandai')">−</button>
+      <button onclick="addItem('Thandai',100)">+</button>
+    </div>
   </div>
+
   <div class="card">
-    <img src="katorichaat.jpg"><h3>Special Katori Chaat</h3><p>₹200 / Piece<br><span class="small">Minimum order: 10 pieces</span></p>
-    <div><button onclick="decreaseItem('Katori Chaat')">−</button> <button onclick="addToCart('Katori Chaat',200,10)">+</button></div>
+    <img src="katorichaat.jpg">
+    <h3>Special Katori Chaat</h3>
+    <p>₹200 / Piece<br><span class="small">Minimum order: 10 pieces</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Katori Chaat')">−</button>
+      <button onclick="addItem('Katori Chaat',200,true)">+</button>
+    </div>
   </div>
+
   <div class="card">
-    <img src="dahibhalle.jpg"><h3>Dahi Bhalle</h3><p>₹175 / Plate</p>
-    <div><button onclick="decreaseItem('Dahi Bhalle')">−</button> <button onclick="addToCart('Dahi Bhalle',175)">+</button></div>
+    <img src="dahibhalle.jpg">
+    <h3>Dahi Bhalle</h3>
+    <p>₹175 / Plate</p>
+    <div class="qty">
+      <button onclick="removeItem('Dahi Bhalle')">−</button>
+      <button onclick="addItem('Dahi Bhalle',175)">+</button>
+    </div>
   </div>
 </div>
 
 <div class="footer">
   <h3>Delivery Partners</h3>
-  <div class="logos">
-    <div><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png"><div class="small">Coming Soon</div></div>
-    <div><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png"><div class="small">Coming Soon</div></div>
-  </div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png">
+  <div class="small">Coming Soon</div>
 </div>
 
 <div class="cart-btn" onclick="toggleCart()">🛒 Cart</div>
 
-<div class="cart-popup" id="cartPopup">
-  <h3 style="margin:4px 0;font-size:16px">Invoice</h3>
+<div class="cart" id="cart">
+  <h3>Invoice</h3>
   <div id="cartItems"></div>
-  <h4 style="margin:6px 0;font-size:14px">Total ₹ <span id="total">0</span></h4>
+  <strong>Total ₹ <span id="total">0</span></strong>
 
-  <h4 style="margin:6px 0;font-size:14px">Customer Details</h4>
-  <input id="custName" placeholder="Full Name">
-  <input id="custPhone" placeholder="Phone Number">
-  <textarea id="custAddr" placeholder="Delivery Address"></textarea>
+  <h4>Customer Details</h4>
+  <input id="name" placeholder="Full Name">
+  <input id="phone" placeholder="Phone Number">
+  <textarea id="address" placeholder="Delivery Address"></textarea>
 
-  <h4>Scan & Pay</h4>
-  <img src="upiscanner.jpg" style="width:180px;display:block;margin:auto">
-  <p class="small">After payment, download invoice or confirm order</p>
+  <img src="upiscanner.jpg" style="width:160px;display:block;margin:10px auto">
 
-  <button onclick="downloadPDF()">Download Invoice (PDF)</button>
-  <button onclick="placeOrder()" style="margin-top:6px">Confirm Order</button>
+  <button class="action" onclick="confirmOrder()">Confirm Order</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 let cart = {};
-let cartOpen = false;
 
-function showCart(){
-  const cartEl = document.getElementById('cartPopup');
-  if(!cartEl) return;
-  cartEl.style.display = 'block';
-  cartEl.style.visibility = 'visible';
-  cartEl.style.opacity = '1';
-  cartOpen = true;
-}
-
-// Safety: ensure cart can always be opened
-window.openCart = showCart;
-}
-
-function addToCart(name, price, minQty=0){
-  if(!cart[name]){
-    cart[name] = { price: price, qty: minQty>0 ? minQty : 1 };
-  } else {
-    cart[name].qty += 1;
-  }
-  renderCart();
-  showCart();
-}
-
-function decreaseItem(name){
-  if(!cart[name]) return;
-  if(name === 'Katori Chaat' && cart[name].qty <= 10){
-    alert('Minimum order for Katori Chaat is 10 pieces');
-    return;
-  }
-  cart[name].qty -= 1;
-  if(cart[name].qty <= 0) delete cart[name];
-  renderCart();
-}
-
-function toggleCart(){
-  const cartEl = document.getElementById('cartPopup');
-  cartOpen = !cartOpen;
-  cartEl.style.display = cartOpen ? 'block' : 'none';
-}
-
-function increaseItem(name, price, min10=false){
+function addItem(name, price, min10=false){
   if(!cart[name]){
     cart[name] = { price: price, qty: min10 ? 10 : 1 };
   } else {
     cart[name].qty += 1;
   }
+  openCart();
   renderCart();
-  showCart();
 }
 
-function decreaseItem(name){
+function removeItem(name){
   if(!cart[name]) return;
 
-  // Enforce minimum for Katori Chaat
   if(name === 'Katori Chaat'){
-    if(cart[name].qty <= 10){
+    if(cart[name].qty > 10){
+      cart[name].qty -= 1;
+    } else {
       alert('Minimum order for Katori Chaat is 10 pieces');
       return;
     }
+  } else {
+    cart[name].qty -= 1;
   }
 
-  cart[name].qty = cart[name].qty - 1;
-
-  if(cart[name].qty <= 0){
-    delete cart[name];
-  }
-
+  if(cart[name].qty <= 0) delete cart[name];
   renderCart();
-  showCart();
-}
 }
 
 function renderCart(){
-  let html = '';
-  let total = 0;
-  for(const item in cart){
-    const amt = cart[item].qty * cart[item].price;
+  let html=''; let total=0;
+  for(let i in cart){
+    let amt = cart[i].qty * cart[i].price;
     total += amt;
-    html += `<div class="cart-item"><span>${item} x ${cart[item].qty}</span><span>₹${amt}</span></div>`;
+    html += `<div class="cart-item"><span>${i} x ${cart[i].qty}</span><span>₹${amt}</span></div>`;
   }
-  if(!html) html = '<p class="small">Cart is empty</p>';
+  if(!html) html='<p class="small">Cart is empty</p>';
   document.getElementById('cartItems').innerHTML = html;
   document.getElementById('total').innerText = total;
+}
+
+function openCart(){
+  document.getElementById('cart').style.display='block';
+}
+
+function toggleCart(){
+  const c = document.getElementById('cart');
+  c.style.display = c.style.display==='block'?'none':'block';
+}
+
+function confirmOrder(){
+  if(!name.value || !phone.value || !address.value){
+    alert('Please fill customer details'); return;
+  }
+  let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
+  msg += 'Customer: '+name.value+'\nPhone: '+phone.value+'\nAddress: '+address.value+'\n\nItems:\n';
+  for(let i in cart){
+    msg += `${i} - Qty ${cart[i].qty}, Rate ₹${cart[i].price}, Amount ₹${cart[i].qty*cart[i].price}\n`;
+  }
+  msg += '\nOrder Confirmed & Payment Received';
+  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
 }
 </script>
 </body>
