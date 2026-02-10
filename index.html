@@ -97,6 +97,7 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
   <img src="upiscanner.jpg" style="width:150px;display:block;margin:8px auto">
 
   <button class="action" onclick="confirmOrder()">Confirm Order</button>
+  <button class="action" onclick="downloadInvoice()">Download Invoice (PDF)</button>
 </div>
 
 <script>
@@ -158,6 +159,35 @@ function confirmOrder(){
   msg += '\nOrder Confirmed & Payment Received';
   window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
 }
+function downloadInvoice(){
+  if(!name.value || !phone.value || !address.value){
+    alert('Please fill customer details'); return;
+  }
+  if(Object.keys(cart).length===0){
+    alert('Cart is empty'); return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  let y = 10;
+  doc.setFontSize(14);
+  doc.text('Mankhush Home Delights',10,y); y+=8;
+  doc.setFontSize(11);
+  doc.text('Customer: '+name.value,10,y); y+=6;
+  doc.text('Phone: '+phone.value,10,y); y+=6;
+  doc.text('Address: '+address.value,10,y); y+=8;
+  doc.text('Items:',10,y); y+=6;
+  let total=0;
+  for(const i in cart){
+    const amt = cart[i].qty*cart[i].price;
+    total+=amt;
+    doc.text(`${i} | Qty ${cart[i].qty} | ₹${amt}`,10,y);
+    y+=6;
+  }
+  y+=4;
+  doc.text('Total Amount: ₹'+total,10,y);
+  doc.save('invoice.pdf');
+}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
