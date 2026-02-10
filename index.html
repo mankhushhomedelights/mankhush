@@ -151,6 +151,11 @@ function confirmOrder(){
   if(!name.value || !phone.value || !address.value){
     alert('Please fill customer details'); return;
   }
+  if(Object.keys(cart).length===0){
+    alert('Cart is empty'); return;
+  }
+  sendWhatsApp();
+}
   let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
   msg += 'Customer: '+name.value+'\nPhone: '+phone.value+'\nAddress: '+address.value+'\n\nItems:\n';
   for(const i in cart){
@@ -186,8 +191,44 @@ function downloadInvoice(){
   y+=4;
   doc.text('Total Amount: ₹'+total,10,y);
   doc.save('invoice.pdf');
+  sendWhatsApp();
 }
-</script>
+  if(Object.keys(cart).length===0){
+    alert('Cart is empty'); return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  let y = 10;
+  doc.setFontSize(14);
+  doc.text('Mankhush Home Delights',10,y); y+=8;
+  doc.setFontSize(11);
+  doc.text('Customer: '+name.value,10,y); y+=6;
+  doc.text('Phone: '+phone.value,10,y); y+=6;
+  doc.text('Address: '+address.value,10,y); y+=8;
+  doc.text('Items:',10,y); y+=6;
+  let total=0;
+  for(const i in cart){
+    const amt = cart[i].qty*cart[i].price;
+    total+=amt;
+    doc.text(`${i} | Qty ${cart[i].qty} | ₹${amt}`,10,y);
+    y+=6;
+  }
+  y+=4;
+  doc.text('Total Amount: ₹'+total,10,y);
+  doc.save('invoice.pdf');
+}
+function sendWhatsApp(){
+  let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
+  msg += 'Customer: '+name.value+'\n';
+  msg += 'Phone: '+phone.value+'\n';
+  msg += 'Address: '+address.value+'\n\nItems:\n';
+  let total=0;
+  for(const i in cart){
+    const amt = cart[i].qty * cart[i].price;
+    total+=amt;
+    msg += `${i} - Qty ${cart[i].qty}, Amount ₹${amt}\n`;
+  }
+  msg += '\nTotal: ₹'+total+'\nOrder Confirmed & Paym
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
