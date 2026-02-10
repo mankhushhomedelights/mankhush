@@ -99,6 +99,7 @@ button.action{width:100%;margin-top:8px;padding:8px;border:none;border-radius:8p
 </div>
 
 <script>
+// ===== SIMPLE, STABLE CART LOGIC (RESET) =====
 let cart = {};
 
 function addItem(name, price, min10=false){
@@ -128,40 +129,48 @@ function removeItem(name){
   if(cart[name].qty <= 0) delete cart[name];
   renderCart();
 }
-}
 
 function renderCart(){
-  let html=''; let total=0;
-  for(let i in cart){
-    let amt = cart[i].qty * cart[i].price;
+  let html = '';
+  let total = 0;
+
+  for(const item in cart){
+    const amt = cart[item].qty * cart[item].price;
     total += amt;
-    html += `<div class="cart-item"><span>${i} x ${cart[i].qty}</span><span>₹${amt}</span></div>`;
+    html += `<div class="cart-item"><span>${item} x ${cart[item].qty}</span><span>₹${amt}</span></div>`;
   }
-  if(!html) html='<p class="small">Cart is empty</p>';
+
+  if(!html) html = '<p class="small">Cart is empty</p>';
+
   document.getElementById('cartItems').innerHTML = html;
   document.getElementById('total').innerText = total;
 }
 
 function openCart(){
-  document.getElementById('cart').style.display='block';
+  document.getElementById('cart').style.display = 'block';
 }
 
 function toggleCart(){
   const c = document.getElementById('cart');
-  c.style.display = c.style.display==='block'?'none':'block';
+  c.style.display = c.style.display === 'block' ? 'none' : 'block';
 }
 
 function confirmOrder(){
   if(!name.value || !phone.value || !address.value){
     alert('Please fill customer details'); return;
   }
+
   let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
-  msg += 'Customer: '+name.value+'\nPhone: '+phone.value+'\nAddress: '+address.value+'\n\nItems:\n';
-  for(let i in cart){
-    msg += `${i} - Qty ${cart[i].qty}, Rate ₹${cart[i].price}, Amount ₹${cart[i].qty*cart[i].price}\n`;
+  msg += 'Customer: ' + name.value + '\n';
+  msg += 'Phone: ' + phone.value + '\n';
+  msg += 'Address: ' + address.value + '\n\nItems:\n';
+
+  for(const i in cart){
+    msg += `${i} - Qty ${cart[i].qty}, Rate ₹${cart[i].price}, Amount ₹${cart[i].qty * cart[i].price}\n`;
   }
+
   msg += '\nOrder Confirmed & Payment Received';
-  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/918209520964?text=' + encodeURIComponent(msg),'_blank');
 }
 </script>
 </body>
