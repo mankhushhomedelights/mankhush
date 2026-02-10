@@ -82,28 +82,29 @@ input,textarea{width:100%;padding:7px;margin-top:6px;border-radius:6px;border:1p
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-let cart = {}; let cartOpen = false;
+let cart = {};
+let cartOpen = false;
 
-function removeItem(name){
-  if(!cart[name]) return;
-  if(name==='Katori Chaat' && cart[name].qty<=10){
-    alert('Minimum order for Katori Chaat is 10 pieces');
-    return;
-  }
-  cart[name].qty--;
-  if(cart[name].qty<=0) delete cart[name];
-  renderCart();
+function showCart(){
+  const cartEl = document.getElementById('cartPopup');
+  cartEl.style.display = 'block';
+  cartOpen = true;
+}
+
+function toggleCart(){
+  const cartEl = document.getElementById('cartPopup');
+  cartOpen = !cartOpen;
+  cartEl.style.display = cartOpen ? 'block' : 'none';
 }
 
 function increaseItem(name, price, min10=false){
   if(!cart[name]){
-    cart[name] = {price: price, qty: min10 ? 10 : 1};
+    cart[name] = { price: price, qty: min10 ? 10 : 1 };
   } else {
     cart[name].qty += 1;
   }
   renderCart();
-  cartOpen = true;
-  document.getElementById('cartPopup').style.display = 'block';
+  showCart();
 }
 
 function decreaseItem(name){
@@ -115,84 +116,19 @@ function decreaseItem(name){
   cart[name].qty -= 1;
   if(cart[name].qty <= 0) delete cart[name];
   renderCart();
-} cartOpen=true;
-  document.getElementById('cartPopup').style.display='block';
-}
-
-function decrease(name){
-  if(!cart[name]) return;
-  if(name==='Katori Chaat' && cart[name].qty<=10){
-    alert('Minimum order for Katori Chaat is 10 pieces');
-    return;
-  }
-  cart[name].qty--;
-  if(cart[name].qty<=0) delete cart[name];
-  renderCart();
-};
-  } else {
-    if(!cart[name]) cart[name] = {price, qty:0};
-    cart[name].qty++;
-  }
-  renderCart(); cartOpen=true;
-  document.getElementById('cartPopup').style.display='block';
-}
 }
 
 function renderCart(){
-  let html=''; let total=0;
-  for(let i in cart){
-    let amt = cart[i].qty * cart[i].price;
+  let html = '';
+  let total = 0;
+  for(const item in cart){
+    const amt = cart[item].qty * cart[item].price;
     total += amt;
-    html += `<div class="cart-item"><span>${i} x ${cart[i].qty}</span><span>₹${amt}</span><span><button style='font-size:11px;padding:2px 6px' onclick="removeItem('${i}')">−</button></span></div>`;
+    html += `<div class="cart-item"><span>${item} x ${cart[item].qty}</span><span>₹${amt}</span></div>`;
   }
-  if(!html) html='<p class="small">Cart is empty</p>';
+  if(!html) html = '<p class="small">Cart is empty</p>';
   document.getElementById('cartItems').innerHTML = html;
   document.getElementById('total').innerText = total;
-}
-}
-
-function toggleCart(){
-  cartOpen=!cartOpen;
-  document.getElementById('cartPopup').style.display = cartOpen?'block':'none';
-}
-
-function downloadPDF(){
-  const { jsPDF } = window.jspdf;
-  let doc = new jsPDF();
-  let y = 10;
-  doc.setFontSize(14);
-  doc.text('Mankhush Home Delights',10,y); y+=8;
-  doc.setFontSize(11);
-  doc.text('Invoice',10,y); y+=8;
-  doc.text('Customer: '+custName.value,10,y); y+=6;
-  doc.text('Phone: '+custPhone.value,10,y); y+=6;
-  doc.text('Address: '+custAddr.value,10,y); y+=8;
-  for(let i in cart){
-    let amt = cart[i].qty * cart[i].price;
-    doc.text(`${i}  Qty:${cart[i].qty}  Rate:₹${cart[i].price}  Amt:₹${amt}`,10,y);
-    y+=6;
-  }
-  y+=4;
-  doc.text('Total: ₹'+document.getElementById('total').innerText,10,y);
-  doc.save('invoice.pdf');
-}
-
-function placeOrder(){
-  let name=custName.value.trim();
-  let phone=custPhone.value.trim();
-  let addr=custAddr.value.trim();
-  if(!name||!phone||!addr||Object.keys(cart).length===0){
-    alert('Please complete order details'); return;
-  }
-  let total=document.getElementById('total').innerText;
-  let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
-  msg += 'Customer: '+name+'\nPhone: '+phone+'\nAddress: '+addr+'\n\nItems:\n';
-  for(let i in cart){
-    let amt=cart[i].qty*cart[i].price;
-    msg += `${i} - Qty ${cart[i].qty}, Rate ₹${cart[i].price}, Amount ₹${amt}\n`;
-  }
-  msg += '\nTotal Amount: ₹'+total+'\nOrder Confirmed & Payment Received';
-  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
 }
 </script>
 </body>
