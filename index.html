@@ -87,10 +87,15 @@ let cartOpen = false;
 
 function showCart(){
   const cartEl = document.getElementById('cartPopup');
-  if(cartEl){
-    cartEl.style.display = 'block';
-    cartOpen = true;
-  }
+  if(!cartEl) return;
+  cartEl.style.display = 'block';
+  cartEl.style.visibility = 'visible';
+  cartEl.style.opacity = '1';
+  cartOpen = true;
+}
+
+// Safety: ensure cart can always be opened
+window.openCart = showCart;
 }
 
 function addToCart(name, price, minQty=0){
