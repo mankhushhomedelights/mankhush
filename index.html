@@ -40,7 +40,7 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
     <p>₹800 / KG</p>
     <div class="qty">
       <button onclick="removeItem('Gujiya')">−</button>
-      <button onclick="addItem('Gujiya',800)">+</button>
+      <button onclick="addItem('Gujiya',800,1)">+</button>
     </div>
   </div>
 
@@ -50,7 +50,7 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
     <p>₹100 / Glass</p>
     <div class="qty">
       <button onclick="removeItem('Thandai')">−</button>
-      <button onclick="addItem('Thandai',100)">+</button>
+      <button onclick="addItem('Thandai',100,5)">+</button>
     </div>
   </div>
 
@@ -60,7 +60,7 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
     <p>₹200 / Piece<br><span class="small">Minimum order: 10 pieces</span></p>
     <div class="qty">
       <button onclick="removeItem('Katori Chaat')">−</button>
-      <button onclick="addItem('Katori Chaat',200,true)">+</button>
+      <button onclick="addItem('Katori Chaat',200,10)">+</button>
     </div>
   </div>
 
@@ -70,7 +70,7 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
     <p>₹175 / Plate</p>
     <div class="qty">
       <button onclick="removeItem('Dahi Bhalle')">−</button>
-      <button onclick="addItem('Dahi Bhalle',175)">+</button>
+      <button onclick="addItem('Dahi Bhalle',175,10)">+</button>
     </div>
   </div>
 </div>
@@ -104,9 +104,15 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
 <script>
 let cart = {};
 
-function addItem(name, price, min10=false){
+function addItem(name, price, minQty){
   if(!cart[name]){
-    cart[name] = { price: price, qty: min10 ? 10 : 1 };
+    cart[name] = { price: price, qty: minQty };
+  } else {
+    cart[name].qty += minQty;
+  }
+  renderCart();
+  document.getElementById('cart').classList.add('open');
+};
   } else {
     cart[name].qty += 1;
   }
@@ -116,10 +122,9 @@ function addItem(name, price, min10=false){
 
 function removeItem(name){
   if(!cart[name]) return;
-  if(name === 'Katori Chaat' && cart[name].qty <= 10){
-    alert('Minimum order for Katori Chaat is 10 pieces');
-    return;
-  }
+  delete cart[name];
+  renderCart();
+}
   cart[name].qty -= 1;
   if(cart[name].qty <= 0) delete cart[name];
   renderCart();
