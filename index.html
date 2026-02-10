@@ -10,29 +10,32 @@ body{margin:0;font-family:'Poppins',sans-serif;background:#fff7f0}
 header{background:#ff6b00;color:#fff;text-align:center;padding:16px}
 header h1{margin:0;font-size:20px}
 header p{margin:4px 0 0;font-size:13px}
-.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:720px;margin:auto}
+
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:760px;margin:auto}
 .card{background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:8px;text-align:center}
 .card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;max-height:110px}
 .card h3{margin:6px 0 2px;font-size:14px}
 .card p{margin:0;font-size:12px}
 .qty{display:flex;justify-content:center;gap:10px;margin-top:6px}
-.qty button{padding:4px 12px;font-size:14px;border:none;border-radius:6px;background:#ff6b00;color:#fff;cursor:pointer}
+.qty button{width:34px;height:34px;font-size:18px;border:none;border-radius:50%;background:#ff6b00;color:#fff;cursor:pointer}
+
 .cart-btn{position:fixed;bottom:10px;right:10px;background:#ff6b00;color:#fff;padding:10px 14px;border-radius:22px;font-size:14px;cursor:pointer;z-index:1000}
-.cart{position:fixed;bottom:10px;right:10px;width:90%;max-width:300px;max-height:45vh;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.25);padding:8px;overflow:auto;display:none;z-index:1001}
+.cart{position:fixed;bottom:10px;right:10px;width:92%;max-width:320px;max-height:45vh;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.25);padding:8px;overflow:auto;display:none;z-index:1001}
 .cart.open{display:block}
 .cart-header{display:flex;justify-content:space-between;align-items:center}
 .cart-header h3{margin:0;font-size:15px}
-.cart-header span{cursor:pointer;font-size:18px;font-weight:bold}
+.cart-header span{cursor:pointer;font-size:18px;font-weight:bold;margin-left:10px}
 .cart-item{display:flex;justify-content:space-between;font-size:13px;margin:6px 0}
 .chip{background:#ffe2cc;color:#000;padding:2px 6px;border-radius:10px;font-size:11px;margin-left:6px}
+
 input,textarea{width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #ccc;font-size:12px}
 button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7px;background:#ff6b00;color:#fff;font-size:13px;cursor:pointer}
+button.clear{background:#999}
 .small{font-size:11px;color:#666}
-.footer{text-align:center;padding:20px}
-.footer img{height:34px;opacity:.5;margin:0 12px}
 </style>
 </head>
 <body>
+
 <header>
 <h1>Mankhush Home Delights — Pure Veg Banarasi Taste</h1>
 <p>For your next big event be it kitty party, birthday or any casual get together.<br>Please give 1 day advance order.</p>
@@ -41,42 +44,168 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
 </header>
 
 <div class="menu">
-<div class="card"><img src="gujiya.jpg"><h3>Desi Ghee Gujiya</h3><p>₹800 / KG<br><span class="small">Minimum: 1 KG</span></p><div class="qty"><button onclick="removeItem('Gujiya',800,1)">−</button><button onclick="addItem</button></div></div>
-<div class="card"><img src="thandai.jpg"><h3>Premium Holi Thandai</h3><p>₹100 / Glass<br><span class="small">Minimum: 5 glasses</span></p><div class="qty"><button onclick="addItem('Thandai',100,5)">+</button></div></div>
-<div class="card"><img src="katorichaat.jpg"><h3>Special Katori Chaat</h3><p>₹200 / Piece<br><span class="small">Minimum: 10 pieces</span></p><div class="qty"><button onclick="addItem('Katori Chaat',200,10)">+</button></div></div>
-<div class="card"><img src="dahibhalle.jpg"><h3>Dahi Bhalle</h3><p>₹175 / Plate<br><span class="small">Minimum: 5 plates</span></p><div class="qty"><button onclick="addItem('Dahi Bhalle',175,5)">+</button></div></div>
-<div class="card"><img src="daalbaatichurma.jpg"><h3>Daal Baati Churma</h3><p>₹300 / Plate<br><span class="small">Minimum: 5 plates</span></p><div class="qty"><button onclick="addItem('Daal Baati Churma',300,5)">+</button></div></div>
-<div class="card"><img src="palakpaneer.jpg"><h3>Palak Paneer</h3><p>₹200 / Plate<br><span class="small">Minimum: 5 plates</span></p><div class="qty"><button onclick="addItem('Palak Paneer',200,5)">+</button></div></div>
+  <div class="card">
+    <img src="gujiya.jpg">
+    <h3>Desi Ghee Gujiya</h3>
+    <p>₹800 / KG<br><span class="small">Min 1 KG</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Gujiya')">−</button>
+      <button onclick="addItem('Gujiya',800,1)">+</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="thandai.jpg">
+    <h3>Premium Holi Thandai</h3>
+    <p>₹100 / Glass<br><span class="small">Min 5 glasses</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Thandai')">−</button>
+      <button onclick="addItem('Thandai',100,5)">+</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="katorichaat.jpg">
+    <h3>Special Katori Chaat</h3>
+    <p>₹200 / Piece<br><span class="small">Min 10 pieces</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Katori Chaat')">−</button>
+      <button onclick="addItem('Katori Chaat',200,10)">+</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="dahibhalle.jpg">
+    <h3>Dahi Bhalle</h3>
+    <p>₹175 / Plate<br><span class="small">Min 5 plates</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Dahi Bhalle')">−</button>
+      <button onclick="addItem('Dahi Bhalle',175,5)">+</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="daalbaatichurma.jpg">
+    <h3>Daal Baati Churma</h3>
+    <p>₹300 / Plate<br><span class="small">Min 5 plates</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Daal Baati Churma')">−</button>
+      <button onclick="addItem('Daal Baati Churma',300,5)">+</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="palakpaneer.jpg">
+    <h3>Palak Paneer</h3>
+    <p>₹200 / Plate<br><span class="small">Min 5 plates</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Palak Paneer')">−</button>
+      <button onclick="addItem('Palak Paneer',200,5)">+</button>
+    </div>
+  </div>
 </div>
 
 <div class="cart-btn" onclick="openCart()">🛒 Cart</div>
 
 <div class="cart" id="cart">
-<div class="cart-header"><h3>Order Summary</h3><div><span onclick="minimiseCart()" style="margin-right:10px">–</span><span onclick="closeCart()">×</span></div></div>
-<div id="cartItems"></div>
-<strong>Total ₹ <span id="total">0</span></strong>
-<h3>Customer Details</h3>
-<input id="custName" placeholder="Full Name">
-<input id="custPhone" placeholder="Phone Number">
-<textarea id="custAddress" placeholder="Delivery Address"></textarea>
-<img src="upiscanner.jpg" style="width:140px;display:block;margin:8px auto">
-<label class="small">Upload Payment Screenshot (required)</label>
-<input type="file" id="paymentProof" accept="image/*" required>
-<button class="action" onclick="placeOrder()">Place Order & Send on WhatsApp</button>
+  <div class="cart-header">
+    <h3>Order Summary</h3>
+    <div>
+      <span onclick="minimiseCart()">–</span>
+      <span onclick="closeCart()">×</span>
+    </div>
+  </div>
+
+  <div id="cartItems"></div>
+  <strong>Total ₹ <span id="total">0</span></strong>
+
+  <h3>Customer Details</h3>
+  <input id="custName" placeholder="Full Name">
+  <input id="custPhone" placeholder="Phone Number">
+  <textarea id="custAddress" placeholder="Delivery Address"></textarea>
+
+  <img src="upiscanner.jpg" style="width:140px;display:block;margin:8px auto">
+  <label class="small">Upload Payment Screenshot (required)</label>
+  <input type="file" id="paymentProof" accept="image/*" required>
+
+  <button class="action" onclick="placeOrder()">Place Order & Send on WhatsApp</button>
+  <button class="action clear" onclick="clearCart()">Clear Cart</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 let cart = {};
-function openCart(){document.getElementById('cart').classList.add('open');}
-function minimiseCart(){document.getElementById('cart').classList.remove('open');}
-function closeCart(){cart={};renderCart();document.getElementById('cart').classList.remove('open');};renderCart();document.getElementById('cart').classList.remove('open');}
-function addItem(name,price,minQty){cart[name]?cart[name].qty+=minQty:cart[name]={price:price,qty:minQty};renderCart();openCart();}
-function removeItem(name){if(cart[name]){delete cart[name];renderCart();}};renderCart();openCart();}
-function renderCart(){let h='';let t=0;for(const i in cart){let a=cart[i].qty*cart[i].price;t+=a;h+=`<div class='cart-item'><span>${i}<span class='chip'>${cart[i].qty}</span></span><span>₹${a}</span></div>`;}document.getElementById('cartItems').innerHTML=h||'<p class="small">Cart is empty</p>';document.getElementById('total').innerText=t;}
-function placeOrder(){const n=custName.value.trim(),p=custPhone.value.trim(),a=custAddress.value.trim(),f=paymentProof.files.length;if(!n||!p||!a){alert('Please fill customer details');return;}if(!Object.keys(cart).length){alert('Cart is empty');return;}if(!f){alert('Payment screenshot is required');return;}generateInvoice(n,p,a);sendWhatsApp(n,p,a);}
-function generateInvoice(n,p,a){const{jsPDF}=window.jspdf;const d=new jsPDF();let y=10,t=0;d.text('Mankhush Home Delights',10,y);y+=8;d.text(`Customer: ${n}`,10,y);y+=6;d.text(`Phone: ${p}`,10,y);y+=6;d.text(`Address: ${a}`,10,y);y+=8;for(const i in cart){let am=cart[i].qty*cart[i].price;t+=am;d.text(`${i} Qty ${cart[i].qty} ₹${am}`,10,y);y+=6;}d.text('Total ₹'+t,10,y+4);d.save('invoice.pdf');}
-function sendWhatsApp(n,p,a){let m=`Mankhush Home Delights%0AOrder & Payment Confirmation%0A%0ACustomer: ${n}%0APhone: ${p}%0AAddress: ${a}%0A%0AItems:%0A`;let t=0;for(const i in cart){let am=cart[i].qty*cart[i].price;t+=am;m+=`${i} Qty ${cart[i].qty} ₹${am}%0A`;}m+=`%0ATotal ₹${t}%0A%0APayment Screenshot attached in this chat.`;window.open('https://wa.me/918209520964?text='+m,'_blank');}
+
+function openCart(){ document.getElementById('cart').classList.add('open'); }
+function minimiseCart(){ document.getElementById('cart').classList.remove('open'); }
+function closeCart(){ cart = {}; renderCart(); minimiseCart(); }
+function clearCart(){ cart = {}; renderCart(); }
+
+function addItem(name, price, minQty){
+  if(!cart[name]) cart[name] = { price: price, qty: minQty };
+  else cart[name].qty += minQty;
+  renderCart(); openCart();
+}
+
+function removeItem(name){
+  if(cart[name]) delete cart[name];
+  renderCart();
+}
+
+function renderCart(){
+  let html = ''; let total = 0;
+  for(const i in cart){
+    const amt = cart[i].qty * cart[i].price;
+    total += amt;
+    html += `<div class='cart-item'><span>${i}<span class='chip'>${cart[i].qty}</span></span><span>₹${amt}</span></div>`;
+  }
+  document.getElementById('cartItems').innerHTML = html || '<p class="small">Cart is empty</p>';
+  document.getElementById('total').innerText = total;
+}
+
+function placeOrder(){
+  const name = custName.value.trim();
+  const phone = custPhone.value.trim();
+  const address = custAddress.value.trim();
+  const proof = paymentProof.files.length;
+
+  if(!Object.keys(cart).length){ alert('Cart is empty'); return; }
+  if(!name || !phone || !address){ alert('Please fill customer details'); return; }
+  if(!proof){ alert('Payment screenshot is required'); return; }
+
+  generateInvoice(name, phone, address);
+  sendWhatsApp(name, phone, address);
+}
+
+function generateInvoice(name, phone, address){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  let y = 10; let total = 0;
+  doc.text('Mankhush Home Delights', 10, y); y += 8;
+  doc.text(`Customer: ${name}`, 10, y); y += 6;
+  doc.text(`Phone: ${phone}`, 10, y); y += 6;
+  doc.text(`Address: ${address}`, 10, y); y += 8;
+  for(const i in cart){
+    const amt = cart[i].qty * cart[i].price;
+    total += amt;
+    doc.text(`${i} - Qty ${cart[i].qty} - ₹${amt}`, 10, y);
+    y += 6;
+  }
+  doc.text(`Total: ₹${total}`, 10, y + 4);
+  doc.save('invoice.pdf');
+}
+
+function sendWhatsApp(name, phone, address){
+  let msg = `Mankhush Home Delights\nOrder & Payment Confirmation\n\nCustomer: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nItems:\n`;
+  let total = 0;
+  for(const i in cart){
+    const amt = cart[i].qty * cart[i].price;
+    total += amt;
+    msg += `${i} - Qty ${cart[i].qty} - ₹${amt}\n`;
+  }
+  msg += `\nTotal: ₹${total}\n\nPayment screenshot attached in this chat.`;
+  window.open('https://wa.me/918209520964?text=' + encodeURIComponent(msg), '_blank');
+}
 </script>
 </body>
 </html>
