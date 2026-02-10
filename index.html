@@ -157,7 +157,15 @@ function renderCart(){
 }
 
 function toggleCart(){
-  document.getElementById('cart').classList.toggle('open');
+  const cartEl = document.getElementById('cart');
+  if(cartEl.classList.contains('open')){
+    // closing cart → clear cart
+    cart = {};
+    renderCart();
+    cartEl.classList.remove('open');
+  } else {
+    cartEl.classList.add('open');
+  }
 }
 
 function getCustomer(){
