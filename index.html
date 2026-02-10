@@ -36,19 +36,19 @@ input,textarea{width:100%;padding:7px;margin-top:6px;border-radius:6px;border:1p
 <div class="menu">
   <div class="card">
     <img src="gujiya.jpg"><h3>Desi Ghee Gujiya</h3><p>₹800 / KG</p>
-    <div><button onclick="decrease('Gujiya')">−</button> <button onclick="increase('Gujiya',800)">+</button></div>
+    <div><button onclick="decreaseItem('Gujiya')">−</button> <button onclick="increaseItem('Gujiya',800)">+</button></div>
   </div>
   <div class="card">
     <img src="thandai.jpg"><h3>Premium Holi Thandai</h3><p>₹100 / Glass</p>
-    <div><button onclick="decrease('Thandai')">−</button> <button onclick="increase('Thandai',100)">+</button></div>
+    <div><button onclick="decreaseItem('Thandai')">−</button> <button onclick="increaseItem('Thandai',100)">+</button></div>
   </div>
   <div class="card">
     <img src="katorichaat.jpg"><h3>Special Katori Chaat</h3><p>₹200 / Piece<br><span class="small">Minimum order: 10 pieces</span></p>
-    <div><button onclick="decrease('Katori Chaat')">−</button> <button onclick="increase('Katori Chaat',200,true)">+</button></div>
+    <div><button onclick="decreaseItem('Katori Chaat')">−</button> <button onclick="increaseItem('Katori Chaat',200,true)">+</button></div>
   </div>
   <div class="card">
     <img src="dahibhalle.jpg"><h3>Dahi Bhalle</h3><p>₹175 / Plate</p>
-    <div><button onclick="decrease('Dahi Bhalle')">−</button> <button onclick="increase('Dahi Bhalle',175)">+</button></div>
+    <div><button onclick="decreaseItem('Dahi Bhalle')">−</button> <button onclick="increaseItem('Dahi Bhalle',175)">+</button></div>
   </div>
 </div>
 
@@ -95,13 +95,27 @@ function removeItem(name){
   renderCart();
 }
 
-function increase(name, price, min10=false){
+function increaseItem(name, price, min10=false){
   if(!cart[name]){
-    cart[name] = {price, qty: min10 ? 10 : 1};
+    cart[name] = {price: price, qty: min10 ? 10 : 1};
   } else {
-    cart[name].qty++;
+    cart[name].qty += 1;
   }
-  renderCart(); cartOpen=true;
+  renderCart();
+  cartOpen = true;
+  document.getElementById('cartPopup').style.display = 'block';
+}
+
+function decreaseItem(name){
+  if(!cart[name]) return;
+  if(name === 'Katori Chaat' && cart[name].qty <= 10){
+    alert('Minimum order for Katori Chaat is 10 pieces');
+    return;
+  }
+  cart[name].qty -= 1;
+  if(cart[name].qty <= 0) delete cart[name];
+  renderCart();
+} cartOpen=true;
   document.getElementById('cartPopup').style.display='block';
 }
 
