@@ -107,6 +107,38 @@ button.clear{background:#999}
   </div>
 </div>
   </div>
+
+  <div class="card">
+    <img src="thandai.jpg">
+    <h3>Premium Holi Thandai</h3>
+    <p>₹100 / Glass<br><span class="small">Minimum: 5 glasses</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Thandai')">−</button>
+      <button onclick="addItem('Thandai',100,5)">+</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="katorichaat.jpg">
+    <h3>Special Katori Chaat</h3>
+    <p>₹200 / Piece<br><span class="small">Minimum: 10 pieces</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Katori Chaat')">−</button>
+      <button onclick="addItem('Katori Chaat',200,10)">+</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="dahibhalle.jpg">
+    <h3>Dahi Bhalle</h3>
+    <p>₹175 / Plate<br><span class="small">Minimum: 10 plates</span></p>
+    <div class="qty">
+      <button onclick="removeItem('Dahi Bhalle')">−</button>
+      <button onclick="addItem('Dahi Bhalle',175,10)">+</button>
+    </div>
+  </div>
+</div>
+
 <div class="footer">
   <h3>Delivery Partners</h3>
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png">
@@ -133,6 +165,8 @@ button.clear{background:#999}
   <textarea id="custAddress" placeholder="Delivery Address"></textarea>
 
   <img src="upiscanner.jpg" style="width:140px;display:block;margin:8px auto">
+  <label class="small">Upload Payment Screenshot (optional)</label>
+  <input type="file" id="paymentProof" accept="image/*">
 
   <button class="action" onclick="confirmOrder()">Confirm Order</button>
   <button class="action" onclick="downloadInvoice()">Download Invoice</button>
@@ -230,13 +264,33 @@ function downloadInvoice(){
 }
 
 function sendWhatsApp(c){
-  let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
-  msg += 'Customer: '+c.name+'\nPhone: '+c.phone+'\nAddress: '+c.address+'\n\nItems:\n';
+  let msg = 'Mankhush Home Delights
+Order & Payment Confirmation
+
+';
+  msg += 'Customer: '+c.name+'
+Phone: '+c.phone+'
+Address: '+c.address+'
+
+Items:
+';
   let total=0;
   for(const i in cart){
     const amt = cart[i].qty * cart[i].price;
     total+=amt;
-    msg += `${i} - Qty ${cart[i].qty}, ₹${amt}\n`;
+    msg += `${i} - Qty ${cart[i].qty}, ₹${amt}
+`;
+  }
+  msg += '
+Total: ₹'+total+'
+';
+  const proof = document.getElementById('paymentProof').files.length;
+  if(proof){ msg += '
+Payment Screenshot: Attached separately'; }
+  msg += '
+Order Confirmed & Payment Received';
+  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
+} - Qty ${cart[i].qty}, ₹${amt}\n`;
   }
   msg += '\nTotal: ₹'+total+'\nOrder Confirmed & Payment Received';
   window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
