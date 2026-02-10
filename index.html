@@ -109,13 +109,24 @@ function increaseItem(name, price, min10=false){
 
 function decreaseItem(name){
   if(!cart[name]) return;
-  if(name === 'Katori Chaat' && cart[name].qty <= 10){
-    alert('Minimum order for Katori Chaat is 10 pieces');
-    return;
+
+  // Enforce minimum for Katori Chaat
+  if(name === 'Katori Chaat'){
+    if(cart[name].qty <= 10){
+      alert('Minimum order for Katori Chaat is 10 pieces');
+      return;
+    }
   }
-  cart[name].qty -= 1;
-  if(cart[name].qty <= 0) delete cart[name];
+
+  cart[name].qty = cart[name].qty - 1;
+
+  if(cart[name].qty <= 0){
+    delete cart[name];
+  }
+
   renderCart();
+  showCart();
+}
 }
 
 function renderCart(){
