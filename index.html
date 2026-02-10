@@ -41,7 +41,7 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
 </header>
 
 <div class="menu">
-<div class="card"><img src="gujiya.jpg"><h3>Desi Ghee Gujiya</h3><p>₹800 / KG<br><span class="small">Minimum: 1 KG</span></p><div class="qty"><button onclick="addItem('Gujiya',800,1)">+</button></div></div>
+<div class="card"><img src="gujiya.jpg"><h3>Desi Ghee Gujiya</h3><p>₹800 / KG<br><span class="small">Minimum: 1 KG</span></p><div class="qty"><button onclick="removeItem('Gujiya',800,1)">−</button><button onclick="addItem</button></div></div>
 <div class="card"><img src="thandai.jpg"><h3>Premium Holi Thandai</h3><p>₹100 / Glass<br><span class="small">Minimum: 5 glasses</span></p><div class="qty"><button onclick="addItem('Thandai',100,5)">+</button></div></div>
 <div class="card"><img src="katorichaat.jpg"><h3>Special Katori Chaat</h3><p>₹200 / Piece<br><span class="small">Minimum: 10 pieces</span></p><div class="qty"><button onclick="addItem('Katori Chaat',200,10)">+</button></div></div>
 <div class="card"><img src="dahibhalle.jpg"><h3>Dahi Bhalle</h3><p>₹175 / Plate<br><span class="small">Minimum: 5 plates</span></p><div class="qty"><button onclick="addItem('Dahi Bhalle',175,5)">+</button></div></div>
@@ -52,7 +52,7 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
 <div class="cart-btn" onclick="openCart()">🛒 Cart</div>
 
 <div class="cart" id="cart">
-<div class="cart-header"><h3>Order Summary</h3><span onclick="closeCart()">×</span></div>
+<div class="cart-header"><h3>Order Summary</h3><div><span onclick="minimiseCart()" style="margin-right:10px">–</span><span onclick="closeCart()">×</span></div></div>
 <div id="cartItems"></div>
 <strong>Total ₹ <span id="total">0</span></strong>
 <h3>Customer Details</h3>
@@ -69,8 +69,10 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
 <script>
 let cart = {};
 function openCart(){document.getElementById('cart').classList.add('open');}
-function closeCart(){cart={};renderCart();document.getElementById('cart').classList.remove('open');}
+function minimiseCart(){document.getElementById('cart').classList.remove('open');}
+function closeCart(){cart={};renderCart();document.getElementById('cart').classList.remove('open');};renderCart();document.getElementById('cart').classList.remove('open');}
 function addItem(name,price,minQty){cart[name]?cart[name].qty+=minQty:cart[name]={price:price,qty:minQty};renderCart();openCart();}
+function removeItem(name){if(cart[name]){delete cart[name];renderCart();}};renderCart();openCart();}
 function renderCart(){let h='';let t=0;for(const i in cart){let a=cart[i].qty*cart[i].price;t+=a;h+=`<div class='cart-item'><span>${i}<span class='chip'>${cart[i].qty}</span></span><span>₹${a}</span></div>`;}document.getElementById('cartItems').innerHTML=h||'<p class="small">Cart is empty</p>';document.getElementById('total').innerText=t;}
 function placeOrder(){const n=custName.value.trim(),p=custPhone.value.trim(),a=custAddress.value.trim(),f=paymentProof.files.length;if(!n||!p||!a){alert('Please fill customer details');return;}if(!Object.keys(cart).length){alert('Cart is empty');return;}if(!f){alert('Payment screenshot is required');return;}generateInvoice(n,p,a);sendWhatsApp(n,p,a);}
 function generateInvoice(n,p,a){const{jsPDF}=window.jspdf;const d=new jsPDF();let y=10,t=0;d.text('Mankhush Home Delights',10,y);y+=8;d.text(`Customer: ${n}`,10,y);y+=6;d.text(`Phone: ${p}`,10,y);y+=6;d.text(`Address: ${a}`,10,y);y+=8;for(const i in cart){let am=cart[i].qty*cart[i].price;t+=am;d.text(`${i} Qty ${cart[i].qty} ₹${am}`,10,y);y+=6;}d.text('Total ₹'+t,10,y+4);d.save('invoice.pdf');}
