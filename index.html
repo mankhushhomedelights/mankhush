@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mankhush Home Delights</title>
+<style>
+body{margin:0;font-family:Arial;background:#fff7f0}
+header{background:#ff6b00;color:#fff;text-align:center;padding:14px;font-size:20px;font-weight:bold}
+
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:700px;margin:auto}
+@media(max-width:700px){.menu{grid-template-columns:1fr}}
+
+.card{background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:6px;text-align:center}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;max-height:120px}
+.card h3{margin:6px 0 2px;font-size:14px}
+.card p{margin:0;font-size:13px}
+button{background:#ff6b00;color:#fff;border:none;padding:5px 8px;border-radius:6px;cursor:pointer;margin-top:5px;font-size:13px}
+
+.cart-btn{position:fixed;bottom:12px;right:12px;background:#ff6b00;color:#fff;padding:10px 14px;border-radius:24px;font-size:14px;cursor:pointer;z-index:1000}
+
+.cart-popup{position:fixed;left:0;right:0;bottom:0;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -3px 12px rgba(0,0,0,.25);padding:14px;max-height:80vh;overflow:auto;display:none;z-index:1001}
+.cart-item{display:flex;justify-content:space-between;margin:6px 0;font-size:13px}
+.small{font-size:12px;color:#666}
+input,textarea{width:100%;padding:7px;margin-top:6px;border-radius:6px;border:1px solid #ccc;font-size:13px}
+
+.footer{padding:24px;text-align:center}
+.footer .logos{display:flex;justify-content:center;gap:30px;margin-top:10px}
+.footer img{height:36px;opacity:0.5}
+</style>
+</head>
+<body>
+
+<header>Mankhush Home Delights — Pure Veg Banarasi Taste</header>
+
+<div class="menu">
+  <div class="card">
+    <img src="gujiya.jpg"><h3>Desi Ghee Gujiya</h3><p>₹800 / KG</p>
+    <button onclick="addItem('Gujiya',800)">Add</button>
+  </div>
+  <div class="card">
+    <img src="thandai.jpg"><h3>Premium Holi Thandai</h3><p>₹100 / Glass</p>
+    <button onclick="addItem('Thandai',100)">Add</button>
+  </div>
+  <div class="card">
+    <img src="katorichaat.jpg"><h3>Special Katori Chaat</h3><p>₹200 / Piece</p>
+    <button onclick="addItem('Katori Chaat',200)">Add</button>
+  </div>
+  <div class="card">
+    <img src="dahibhalle.jpg"><h3>Dahi Bhalle</h3><p>₹175 / Plate</p>
+    <button onclick="addItem('Dahi Bhalle',175)">Add</button>
+  </div>
+</div>
+
+<div class="footer">
+  <h3>Delivery Partners</h3>
+  <div class="logos">
+    <div><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png"><div class="small">Coming Soon</div></div>
+    <div><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png"><div class="small">Coming Soon</div></div>
+  </div>
+</div>
+
+<div class="cart-btn" onclick="toggleCart()">🛒 Cart</div>
+
+<div class="cart-popup" id="cartPopup">
+  <h3>Invoice</h3>
+  <div id="cartItems"></div>
+  <h4>Total ₹ <span id="total">0</span></h4>
+
+  <h4>Customer Details</h4>
+  <input id="custName" placeholder="Full Name">
+  <input id="custPhone" placeholder="Phone Number">
+  <textarea id="custAddr" placeholder="Delivery Address"></textarea>
+
+  <h4>Scan & Pay</h4>
+  <img src="upiscanner.jpg" style="width:180px;display:block;margin:auto">
+  <p class="small">After payment, download invoice or confirm order</p>
+
+  <button onclick="downloadPDF()">Download Invoice (PDF)</button>
+  <button onclick="placeOrder()" style="margin-top:6px">Confirm Order</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+let cart = {}; let cartOpen = false;
+
+function addItem(name, price){
+  if(!cart[name]) cart[name] = {price, qty:0};
+  cart[name].qty++;
+  renderCart(); cartOpen=true;
+  document.getElementById('cartPopup').style.display='block';
+}
+
+function renderCart(){
+  let html=''; let total=0;
+  for(let i in cart){
+    let amt = cart[i].qty * cart[i].price;
+    total += amt;
+    html += `<div class="cart-item"><span>${i} x ${cart[i].qty}</span><span>₹${amt}</span></div>`;
+  }
+  if(!html) html='<p class="small">Cart is empty</p>';
+  document.getElementById('cartItems').innerHTML = html;
+  document.getElementById('total').innerText = total;
+}
+
+function toggleCart(){
+  cartOpen=!cartOpen;
+  document.getElementById('cartPopup').style.display = cartOpen?'block':'none';
+}
+
+function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  let doc = new jsPDF();
+  let y = 10;
+  doc.setFontSize(14);
+  doc.text('Mankhush Home Delights',10,y); y+=8;
+  doc.setFontSize(11);
+  doc.text('Invoice',10,y); y+=8;
+  doc.text('Customer: '+custName.value,10,y); y+=6;
+  doc.text('Phone: '+custPhone.value,10,y); y+=6;
+  doc.text('Address: '+custAddr.value,10,y); y+=8;
+  for(let i in cart){
+    let amt = cart[i].qty * cart[i].price;
+    doc.text(`${i}  Qty:${cart[i].qty}  Rate:₹${cart[i].price}  Amt:₹${amt}`,10,y);
+    y+=6;
+  }
+  y+=4;
+  doc.text('Total: ₹'+document.getElementById('total').innerText,10,y);
+  doc.save('invoice.pdf');
+}
+
+function placeOrder(){
+  let name=custName.value.trim();
+  let phone=custPhone.value.trim();
+  let addr=custAddr.value.trim();
+  if(!name||!phone||!addr||Object.keys(cart).length===0){
+    alert('Please complete order details'); return;
+  }
+  let total=document.getElementById('total').innerText;
+  let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
+  msg += 'Customer: '+name+'\nPhone: '+phone+'\nAddress: '+addr+'\n\nItems:\n';
+  for(let i in cart){
+    let amt=cart[i].qty*cart[i].price;
+    msg += `${i} - Qty ${cart[i].qty}, Rate ₹${cart[i].price}, Amount ₹${amt}\n`;
+  }
+  msg += '\nTotal Amount: ₹'+total+'\nOrder Confirmed & Payment Received';
+  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>
