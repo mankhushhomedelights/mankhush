@@ -16,16 +16,17 @@ header{background:#ff6b00;color:#fff;text-align:center;padding:14px;font-size:20
 .qty{display:flex;justify-content:center;gap:8px;margin-top:6px}
 .qty button{padding:4px 10px;font-size:14px;border:none;border-radius:6px;background:#ff6b00;color:#fff;cursor:pointer}
 
-.cart-btn{position:fixed;bottom:12px;right:12px;background:#ff6b00;color:#fff;padding:10px 14px;border-radius:22px;font-size:14px;cursor:pointer;z-index:1000}
+.cart-btn{position:fixed;bottom:10px;right:10px;background:#ff6b00;color:#fff;padding:10px 14px;border-radius:22px;font-size:14px;cursor:pointer;z-index:1000}
 
-.cart{position:fixed;bottom:8px;right:8px;background:#fff;border-radius:12px;box-shadow:0 -2px 8px rgba(0,0,0,.25);width:92%;max-width:320px;max-height:50vh;overflow:auto;padding:10px;display:none;z-index:1001}
-.cart h3{margin:2px 0 6px;font-size:15px}
+.cart{position:fixed;bottom:10px;right:10px;width:90%;max-width:320px;max-height:50vh;background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.3);padding:10px;overflow:auto;display:none;z-index:1001}
+.cart.open{display:block}
+.cart h3{margin:4px 0 6px;font-size:15px}
 .cart-item{display:flex;justify-content:space-between;font-size:13px;margin:6px 0}
 input,textarea{width:100%;padding:6px;margin-top:5px;border-radius:6px;border:1px solid #ccc;font-size:12px}
 button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7px;background:#ff6b00;color:#fff;font-size:13px;cursor:pointer}
 .small{font-size:12px;color:#666}
 .footer{text-align:center;padding:20px}
-.footer img{height:36px;opacity:.5;margin:0 12px}
+.footer img{height:34px;opacity:.5;margin:0 12px}
 </style>
 </head>
 <body>
@@ -93,13 +94,12 @@ button.action{width:100%;margin-top:6px;padding:7px;border:none;border-radius:7p
   <input id="phone" placeholder="Phone Number">
   <textarea id="address" placeholder="Delivery Address"></textarea>
 
-  <img src="upiscanner.jpg" style="width:160px;display:block;margin:10px auto">
+  <img src="upiscanner.jpg" style="width:150px;display:block;margin:8px auto">
 
   <button class="action" onclick="confirmOrder()">Confirm Order</button>
 </div>
 
 <script>
-// ===== SIMPLE, STABLE CART LOGIC (RESET) =====
 let cart = {};
 
 function addItem(name, price, min10=false){
@@ -108,8 +108,8 @@ function addItem(name, price, min10=false){
   } else {
     cart[name].qty += 1;
   }
-  openCart();
   renderCart();
+  document.getElementById('cart').classList.add('open');
 }
 
 function removeItem(name){
@@ -131,59 +131,32 @@ function removeItem(name){
 }
 
 function renderCart(){
-  let html = '';
-  let total = 0;
-
-  for(const item in cart){
-    const amt = cart[item].qty * cart[item].price;
+  let html=''; let total=0;
+  for(const i in cart){
+    const amt = cart[i].qty * cart[i].price;
     total += amt;
-    html += `<div class="cart-item"><span>${item} x ${cart[item].qty}</span><span>₹${amt}</span></div>`;
+    html += `<div class="cart-item"><span>${i} x ${cart[i].qty}</span><span>₹${amt}</span></div>`;
   }
-
-  if(!html) html = '<p class="small">Cart is empty</p>';
-
+  if(!html) html='<p class="small">Cart is empty</p>';
   document.getElementById('cartItems').innerHTML = html;
   document.getElementById('total').innerText = total;
 }
 
-function openCart(){
-  const c = document.getElementById('cart');
-  if(!c) return;
-  c.style.display = 'block';
-}
-
 function toggleCart(){
-  const c = document.getElementById('cart');
-  if(!c) return;
-  c.style.display = (c.style.display === 'block') ? 'none' : 'block';
+  document.getElementById('cart').classList.toggle('open');
 }
 
 function confirmOrder(){
   if(!name.value || !phone.value || !address.value){
     alert('Please fill customer details'); return;
   }
-
-  let msg = 'Mankhush Home Delights
-Order & Payment Confirmation
-
-';
-  msg += 'Customer: ' + name.value + '
-';
-  msg += 'Phone: ' + phone.value + '
-';
-  msg += 'Address: ' + address.value + '
-
-Items:
-';
-
+  let msg = 'Mankhush Home Delights\nOrder & Payment Confirmation\n\n';
+  msg += 'Customer: '+name.value+'\nPhone: '+phone.value+'\nAddress: '+address.value+'\n\nItems:\n';
   for(const i in cart){
-    msg += `${i} - Qty ${cart[i].qty}, Rate ₹${cart[i].price}, Amount ₹${cart[i].qty * cart[i].price}
-`;
+    msg += `${i} - Qty ${cart[i].qty}, Rate ₹${cart[i].price}, Amount ₹${cart[i].qty*cart[i].price}\n`;
   }
-
-  msg += '
-Order Confirmed & Payment Received';
-  window.open('https://wa.me/918209520964?text=' + encodeURIComponent(msg),'_blank');
+  msg += '\nOrder Confirmed & Payment Received';
+  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
 }
 </script>
 </body>
