@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mankhush Home Delights</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Poppins',sans-serif;background:#fff7f0margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff7f0}
-header{background:#ff6b00;color:#fff;text-align:center;padding:16px;font-family:'Poppins',sans-serif}
+body{margin:0;font-family:'Poppins',sans-serif;background:#fff7f0}
+header{background:#ff6b00;color:#fff;text-align:center;padding:16px}
 header h1{margin:0;font-size:20px}
 header p{margin:4px 0 0;font-size:13px}
 
@@ -94,17 +94,16 @@ button.clear{background:#999}
   <div class="small">Coming Soon</div>
 </div>
 
-<div class="cart-btn" onclick="toggleCart()">🛒 Cart</div>
+<div class="cart-btn" onclick="openCart()">🛒 Cart</div>
 
 <div class="cart" id="cart">
   <div class="cart-header">
-  <h3>Order Summary</h3>
-  <div>
-    <span onclick="minimiseCart()" style="margin-right:8px;cursor:pointer">–</span>
-    <span onclick="closeCart()" style="cursor:pointer">×</span>
+    <h3>Order Summary</h3>
+    <div>
+      <span onclick="minimiseCart()">–</span>
+      <span onclick="closeCart()">×</span>
+    </div>
   </div>
-</div>
-</div>
   <div id="cartItems"></div>
   <strong>Total ₹ <span id="total">0</span></strong>
 
@@ -124,6 +123,20 @@ button.clear{background:#999}
 <script>
 let cart = {};
 
+function openCart(){
+  document.getElementById('cart').classList.add('open');
+}
+
+function minimiseCart(){
+  document.getElementById('cart').classList.remove('open');
+}
+
+function closeCart(){
+  cart = {};
+  renderCart();
+  document.getElementById('cart').classList.remove('open');
+}
+
 function addItem(name, price, minQty){
   if(!cart[name]){
     cart[name] = { price: price, qty: minQty };
@@ -132,12 +145,6 @@ function addItem(name, price, minQty){
   }
   renderCart();
   openCart();
-};
-  } else {
-    cart[name].qty += minQty;
-  }
-  renderCart();
-  document.getElementById('cart').classList.add('open');
 }
 
 function removeItem(name){
@@ -158,43 +165,9 @@ function renderCart(){
     total += amt;
     html += `<div class="cart-item"><span>${i}<span class="chip">${qty}</span></span><span>₹${amt}</span></div>`;
   }
-  if(!html) html = '<p class="small">Cart is empty</p>';
+  if(!html) html='<p class="small">Cart is empty</p>';
   document.getElementById('cartItems').innerHTML = html;
   document.getElementById('total').innerText = total;
-}
-
-function minimiseCart(){
-  document.getElementById('cart').classList.remove('open');
-}
-
-function closeCart(){
-  cart = {};
-  renderCart();
-  document.getElementById('cart').classList.remove('open');
-}
-
-function openCart(){
-  document.getElementById('cart').classList.add('open');
-}
-
-function minimiseCart(){
-  document.getElementById('cart').classList.remove('open');
-}
-
-function closeCart(){
-  cart = {};
-  renderCart();
-  document.getElementById('cart').classList.remove('open');
-}
-
-function toggleCart(){
-  document.getElementById('cart').classList.toggle('open');
-};
-    renderCart();
-    cartEl.classList.remove('open');
-  } else {
-    cartEl.classList.add('open');
-  }
 }
 
 function getCustomer(){
