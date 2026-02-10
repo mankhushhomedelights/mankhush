@@ -41,7 +41,7 @@ button.clear{background:#999}
 <header>
   <h1>Mankhush Home Delights — Pure Veg Banarasi Taste</h1>
   <p>For your next big event be it kitty party, birthday or any casual get together.<br>Please give 1 day advance order.</p>
-  <p>Delivery available on actual rates by Rapido Riders / Courier Services</p>
+  <p>Delivery available on actual rates by Rapido Riders / Courier Services (Packaging charges extra)</p>
   <p style="font-size:11px;opacity:.9">By Shivangi Srivastava</p>
 </header>
 
@@ -131,6 +131,12 @@ function addItem(name, price, minQty){
     cart[name].qty += minQty;
   }
   renderCart();
+  openCart();
+};
+  } else {
+    cart[name].qty += minQty;
+  }
+  renderCart();
   document.getElementById('cart').classList.add('open');
 }
 
@@ -155,6 +161,20 @@ function renderCart(){
   if(!html) html = '<p class="small">Cart is empty</p>';
   document.getElementById('cartItems').innerHTML = html;
   document.getElementById('total').innerText = total;
+}
+
+function minimiseCart(){
+  document.getElementById('cart').classList.remove('open');
+}
+
+function closeCart(){
+  cart = {};
+  renderCart();
+  document.getElementById('cart').classList.remove('open');
+}
+
+function openCart(){
+  document.getElementById('cart').classList.add('open');
 }
 
 function minimiseCart(){
