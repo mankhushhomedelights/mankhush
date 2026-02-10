@@ -114,19 +114,23 @@ function addItem(name, price, min10=false){
 function removeItem(name){
   if(!cart[name]) return;
 
+  // Special rule for Katori Chaat
   if(name === 'Katori Chaat'){
     if(cart[name].qty > 10){
-      cart[name].qty -= 1;
+      cart[name].qty -= 1; // reduce one by one
     } else {
-      alert('Minimum order for Katori Chaat is 10 pieces');
-      return;
+      // at minimum 10 → allow full removal
+      delete cart[name];
     }
-  } else {
-    cart[name].qty -= 1;
+    renderCart();
+    return;
   }
 
+  // Normal items
+  cart[name].qty -= 1;
   if(cart[name].qty <= 0) delete cart[name];
   renderCart();
+}
 }
 
 function renderCart(){
