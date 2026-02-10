@@ -125,8 +125,6 @@ button.clear{background:#999}
   <textarea id="custAddress" placeholder="Delivery Address"></textarea>
 
   <img src="upiscanner.jpg" style="width:140px;display:block;margin:8px auto">
-  <label class="small">Upload Payment Screenshot (required)</label>
-  <input type="file" id="paymentProof" accept="image/*" required>
 
   <button class="action" onclick="placeOrder()">Place Order & Send on WhatsApp</button>
   <button class="action clear" onclick="clearCart()">Clear Cart</button>
@@ -162,16 +160,19 @@ function renderCart(){
   document.getElementById('cartItems').innerHTML = html || '<p class="small">Cart is empty</p>';
   document.getElementById('total').innerText = total;
 }
-
 function placeOrder(){
   const name = custName.value.trim();
   const phone = custPhone.value.trim();
   const address = custAddress.value.trim();
-  const proof = paymentProof.files.length;
 
-  if(!Object.keys(cart).length){ alert('Cart is empty'); return; }
-  if(!name || !phone || !address){ alert('Please fill customer details'); return; }
-  if(!proof){ alert('Payment screenshot is required'); return; }
+  if(!Object.keys(cart).length){
+    alert('Cart is empty'); 
+    return;
+  }
+  if(!name || !phone || !address){
+    alert('Please fill customer details'); 
+    return;
+  }
 
   generateInvoice(name, phone, address);
   sendWhatsApp(name, phone, address);
