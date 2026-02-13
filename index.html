@@ -214,8 +214,11 @@ background:#999;
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
-let cart={};
+let cart = {};
+let invoiceGenerating = false;   // prevents double download
 
 function addItem(name,price,minQty){
 if(!cart[name]) cart[name]={price:price,qty:0,min:minQty};
@@ -294,22 +297,44 @@ window.open("https://wa.me/918209520964?text="+encodeURIComponent(msg),"_blank")
 }
 
 function downloadInvoice(){
+
+if(invoiceGenerating) return;   // prevents double trigger
+invoiceGenerating = true;
+
+if(Object.keys(cart).length===0){
+alert("Cart is empty");
+invoiceGenerating = false;
+return;
+}
+
 const { jsPDF } = window.jspdf;
-const doc=new jsPDF();
-let y=10,total=0;
-doc.text("Mankhush Home Delights",10,y); y+=10;
+const doc = new jsPDF();
+
+let y = 20;
+let total = 0;
+
+doc.setFontSize(16);
+doc.text("Mankhush Home Delights", 20, 10);
+
+doc.setFontSize(12);
 
 for(let item in cart){
-let amt=cart[item].qty*cart[item].price;
-total+=amt;
-doc.text(`${item} - ${cart[item].qty} - ₹${amt}`,10,y);
-y+=8;
+let amt = cart[item].qty * cart[item].price;
+total += amt;
+doc.text(`${item}  |  Qty: ${cart[item].qty}  |  ₹${amt}`, 20, y);
+y += 8;
 }
 
-doc.text(`Total: ₹${total}`,10,y+5);
-doc.save("invoice.pdf");
+y += 5;
+doc.setFontSize(14);
+doc.text(`Total: ₹${total}`, 20, y);
+
+doc.save("Mankhush_Invoice.pdf");
+
+setTimeout(()=>{ invoiceGenerating = false; }, 1000);
 }
 </script>
+
 
 </body>
 </html>
