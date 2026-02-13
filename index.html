@@ -13,12 +13,7 @@ header p{margin:4px 0 0;font-size:13px}
 
 .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:760px;margin:auto}
 .card{background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:8px;text-align:center}
-.card img{
-    width:100%;
-    height:110px;
-    object-fit:cover;
-    border-radius:8px;
-}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;max-height:110px}
 .card h3{margin:6px 0 2px;font-size:14px}
 .card p{margin:0;font-size:12px}
 .qty{display:flex;justify-content:center;gap:10px;margin-top:6px}
@@ -43,211 +38,131 @@ button.clear{background:#999}
 
 <header>
 <h1>Mankhush Home Delights — Pure Veg Banarasi Taste</h1>
-<p>For your next big event be it kitty party, birthday or any casual get together.<br>Please give 1 day advance order.</p>
-<p>Delivery available on actual rates by Rapido Riders / Courier Services (Packaging charges extra)</p>
-<p style="font-size:11px;opacity:.9">By Shivangi Srivastava</p>
+<p>Please give 1 day advance order.</p>
 </header>
 
 <div class="menu">
-  <div class="card">
-    <img src="gujiya.jpg">
-    <h3>Desi Ghee Gujiya</h3>
-    <p>₹800 / KG<br><span class="small">Min 1 KG</span></p>
-    <div class="qty">
-      <button onclick="removeItem('Gujiya')">−</button>
-      <button onclick="addItem('Gujiya',800,1)">+</button>
-    </div>
-  </div>
 
-  <div class="card">
-    <img src="thandai.jpg">
-    <h3>Premium Holi Thandai</h3>
-    <p>₹100 / Glass<br><span class="small">Min 5 glasses</span></p>
-    <div class="qty">
-      <button onclick="removeItem('Thandai')">−</button>
-      <button onclick="addItem('Thandai',100,5)">+</button>
-    </div>
-  </div>
+<!-- Existing Items -->
 
-  <div class="card">
-    <img src="katorichaat.jpg">
-    <h3>Special Katori Chaat</h3>
-    <p>₹200 / Piece<br><span class="small">Min 10 pieces</span></p>
-    <div class="qty">
-      <button onclick="removeItem('Katori Chaat')">−</button>
-      <button onclick="addItem('Katori Chaat',200,10)">+</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="dahibhalle.jpg">
-    <h3>Dahi Bhalle</h3>
-    <p>₹175 / Plate<br><span class="small">Min 5 plates</span></p>
-    <div class="qty">
-      <button onclick="removeItem('Dahi Bhalle')">−</button>
-      <button onclick="addItem('Dahi Bhalle',175,5)">+</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="daalbaatichurma.jpg">
-    <h3>Daal Baati Churma</h3>
-    <p>₹300 / Plate<br><span class="small">Min 5 plates</span></p>
-    <div class="qty">
-      <button onclick="removeItem('Daal Baati Churma')">−</button>
-      <button onclick="addItem('Daal Baati Churma',300,5)">+</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="palakpaneer.jpg">
-    <h3>Palak Paneer</h3>
-    <p>₹200 / Plate<br><span class="small">Min 5 plates</span></p>
-    <div class="qty">
-      <button onclick="removeItem('Palak Paneer')">−</button>
-      <button onclick="addItem('Palak Paneer',200,5)">+</button>
-    </div>
-  </div>
-</div>
 <div class="card">
-  <img src="https://images.unsplash.com/photo-1601924582975-7e91b89b0b8f?auto=format&fit=crop&w=600&q=80">
-  <h3>Veg Pizza with Cheese</h3>
-  <p>₹175 / Piece<br><span class="small">Min 2 pieces</span></p>
-  <div class="qty">
-    <button onclick="removeItem('Veg Pizza')">−</button>
-    <button onclick="addItem('Veg Pizza',175,2)">+</button>
-  </div>
+<img src="gujiya.jpg">
+<h3>Desi Ghee Gujiya</h3>
+<p>₹800 / KG<br><span class="small">Min 1 KG</span></p>
+<div class="qty">
+<button onclick="removeItem('Gujiya')">−</button>
+<button onclick="addItem('Gujiya',800,1)">+</button>
+</div>
 </div>
 
 <div class="card">
-  <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?auto=format&fit=crop&w=600&q=80">
-  <h3>White Sauce Pasta</h3>
-  <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
-  <div class="qty">
-    <button onclick="removeItem('White Pasta')">−</button>
-    <button onclick="addItem('White Pasta',150,2)">+</button>
-  </div>
+<img src="thandai.jpg">
+<h3>Premium Holi Thandai</h3>
+<p>₹100 / Glass<br><span class="small">Min 5 glasses</span></p>
+<div class="qty">
+<button onclick="removeItem('Thandai')">−</button>
+<button onclick="addItem('Thandai',100,5)">+</button>
+</div>
 </div>
 
 <div class="card">
-  <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80">
-  <h3>Veg Noodles</h3>
-  <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
-  <div class="qty">
-    <button onclick="removeItem('Veg Noodles')">−</button>
-    <button onclick="addItem('Veg Noodles',150,2)">+</button>
-  </div>
+<img src="katorichaat.jpg">
+<h3>Special Katori Chaat</h3>
+<p>₹200 / Piece<br><span class="small">Min 10 pieces</span></p>
+<div class="qty">
+<button onclick="removeItem('Katori Chaat')">−</button>
+<button onclick="addItem('Katori Chaat',200,10)">+</button>
+</div>
 </div>
 
 <div class="card">
-  <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80">
-  <h3>Healthy Veg Burger</h3>
-  <p>₹120 / Piece<br><span class="small">Min 2 pieces</span></p>
-  <div class="qty">
-    <button onclick="removeItem('Veg Burger')">−</button>
-    <button onclick="addItem('Veg Burger',120,2)">+</button>
-  </div>
+<img src="dahibhalle.jpg">
+<h3>Dahi Bhalle</h3>
+<p>₹175 / Plate<br><span class="small">Min 5 plates</span></p>
+<div class="qty">
+<button onclick="removeItem('Dahi Bhalle')">−</button>
+<button onclick="addItem('Dahi Bhalle',175,5)">+</button>
 </div>
-<div class="cart" id="cart">
-  <div class="cart-header">
-    <h3>Order Summary</h3>
-    <div>
-      <span onclick="minimiseCart()">–</span>
-      <span onclick="closeCart()">×</span>
-    </div>
-  </div>
-
-  <div id="cartItems"></div>
-  <strong>Total ₹ <span id="total">0</span></strong>
-
-  <h3>Customer Details</h3>
-  <input id="custName" placeholder="Full Name">
-  <input id="custPhone" placeholder="Phone Number">
-  <textarea id="custAddress" placeholder="Delivery Address"></textarea>
-
-  <img src="upiscanner.jpg" style="width:140px;display:block;margin:8px auto">
-
-  <button class="action" onclick="placeOrder()">Place Order & Send on WhatsApp</button>
-  <button class="action clear" onclick="clearCart()">Clear Cart</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<div class="card">
+<img src="daalbaatichurma.jpg">
+<h3>Daal Baati Churma</h3>
+<p>₹300 / Plate<br><span class="small">Min 5 plates</span></p>
+<div class="qty">
+<button onclick="removeItem('Daal Baati Churma')">−</button>
+<button onclick="addItem('Daal Baati Churma',300,5)">+</button>
+</div>
+</div>
+
+<div class="card">
+<img src="palakpaneer.jpg">
+<h3>Palak Paneer</h3>
+<p>₹200 / Plate<br><span class="small">Min 5 plates</span></p>
+<div class="qty">
+<button onclick="removeItem('Palak Paneer')">−</button>
+<button onclick="addItem('Palak Paneer',200,5)">+</button>
+</div>
+</div>
+
+<!-- NEW ITEMS ADDED -->
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601924582975-7e91b89b0b8f?auto=format&fit=crop&w=600&q=80">
+<h3>Veg Pizza with Cheese</h3>
+<p>₹175 / Piece<br><span class="small">Min 2 pieces</span></p>
+<div class="qty">
+<button onclick="removeItem('Veg Pizza')">−</button>
+<button onclick="addItem('Veg Pizza',175,2)">+</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?auto=format&fit=crop&w=600&q=80">
+<h3>White Pasta</h3>
+<p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
+<div class="qty">
+<button onclick="removeItem('White Pasta')">−</button>
+<button onclick="addItem('White Pasta',150,2)">+</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80">
+<h3>Veg Noodles</h3>
+<p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
+<div class="qty">
+<button onclick="removeItem('Veg Noodles')">−</button>
+<button onclick="addItem('Veg Noodles',150,2)">+</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80">
+<h3>Healthy Veg Burger</h3>
+<p>₹120 / Piece<br><span class="small">Min 2 pieces</span></p>
+<div class="qty">
+<button onclick="removeItem('Veg Burger')">−</button>
+<button onclick="addItem('Veg Burger',120,2)">+</button>
+</div>
+</div>
+
+</div>
+
 <script>
 let cart = {};
-
-function openCart(){ document.getElementById('cart').classList.add('open'); }
-function minimiseCart(){ document.getElementById('cart').classList.remove('open'); }
-function closeCart(){ cart = {}; renderCart(); minimiseCart(); }
-function clearCart(){ cart = {}; renderCart(); }
 
 function addItem(name, price, minQty){
   if(!cart[name]) cart[name] = { price: price, qty: minQty };
   else cart[name].qty += minQty;
-  renderCart(); openCart();
+  console.log(cart);
 }
 
 function removeItem(name){
   if(cart[name]) delete cart[name];
-  renderCart();
-}
-
-function renderCart(){
-  let html = ''; let total = 0;
-  for(const i in cart){
-    const amt = cart[i].qty * cart[i].price;
-    total += amt;
-    html += `<div class='cart-item'><span>${i}<span class='chip'>${cart[i].qty}</span></span><span>₹${amt}</span></div>`;
-  }
-  document.getElementById('cartItems').innerHTML = html || '<p class="small">Cart is empty</p>';
-  document.getElementById('total').innerText = total;
-}
-function placeOrder(){
-  const name = custName.value.trim();
-  const phone = custPhone.value.trim();
-  const address = custAddress.value.trim();
-
-  if(!Object.keys(cart).length){
-    alert('Cart is empty'); 
-    return;
-  }
-  if(!name || !phone || !address){
-    alert('Please fill customer details'); 
-    return;
-  }
-
-  generateInvoice(name, phone, address);
-  sendWhatsApp(name, phone, address);
-}
-
-function generateInvoice(name, phone, address){
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  let y = 10; let total = 0;
-  doc.text('Mankhush Home Delights', 10, y); y += 8;
-  doc.text(`Customer: ${name}`, 10, y); y += 6;
-  doc.text(`Phone: ${phone}`, 10, y); y += 6;
-  doc.text(`Address: ${address}`, 10, y); y += 8;
-  for(const i in cart){
-    const amt = cart[i].qty * cart[i].price;
-    total += amt;
-    doc.text(`${i} - Qty ${cart[i].qty} - ₹${amt}`, 10, y);
-    y += 6;
-  }
-  doc.text(`Total: ₹${total}`, 10, y + 4);
-  doc.save('invoice.pdf');
-}
-
-function sendWhatsApp(name, phone, address){
-  let msg = `Mankhush Home Delights\nOrder & Payment Confirmation\n\nCustomer: ${name}\nPhone: ${phone}\nAddress: ${address}\n\nItems:\n`;
-  let total = 0;
-  for(const i in cart){
-    const amt = cart[i].qty * cart[i].price;
-    total += amt;
-    msg += `${i} - Qty ${cart[i].qty} - ₹${amt}\n`;
-  }
- msg += `\nTotal: ₹${total}\n\nIMPORTANT:\nPlease attach the payment screenshot here before sending this message.`;
-  window.open('https://wa.me/918209520964?text=' + encodeURIComponent(msg), '_blank');
+  console.log(cart);
 }
 </script>
+
 </body>
 </html>
