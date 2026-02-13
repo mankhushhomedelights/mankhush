@@ -25,13 +25,13 @@ button.addBtn{margin-top:6px;padding:6px 10px;border:none;border-radius:6px;back
 .cart{position:fixed;bottom:70px;right:15px;width:95%;max-width:400px;max-height:75vh;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:15px;overflow:auto;display:none}
 .cart.open{display:block}
 
+.cart-header{display:flex;justify-content:space-between;align-items:center}
 .cart-item{border-bottom:1px solid #eee;padding:6px 0;font-size:13px}
-.qty-controls{display:flex;gap:6px;align-items:center;margin-top:4px}
+.qty-controls{display:flex;gap:6px;margin-top:4px}
 .qty-controls button{width:24px;height:24px;border:none;border-radius:4px;background:#ff6b00;color:#fff;cursor:pointer}
 
 button.action{width:100%;margin-top:8px;padding:8px;border:none;border-radius:8px;background:#ff6b00;color:#fff;cursor:pointer;font-size:13px}
 button.secondary{background:#999}
-
 .small{font-size:11px;color:#666}
 
 #paymentModal{
@@ -76,77 +76,15 @@ border:1px solid #ccc;
 <div class="card">
 <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80">
 <h3>Veg Pizza with Cheese</h3>
-<p>₹175 / Piece (Min 2)</p>
+<p>₹175 (Min 2)</p>
 <button class="addBtn" onclick="addItem('Veg Pizza with Cheese',175,2)">Add</button>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80">
 <h3>White Pasta</h3>
-<p>₹150 / Plate (Min 2)</p>
+<p>₹150 (Min 2)</p>
 <button class="addBtn" onclick="addItem('White Pasta',150,2)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80">
-<h3>Veg Noodles</h3>
-<p>₹150 / Plate (Min 2)</p>
-<button class="addBtn" onclick="addItem('Veg Noodles',150,2)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80">
-<h3>Healthy Burger</h3>
-<p>₹120 / Piece (Min 2)</p>
-<button class="addBtn" onclick="addItem('Healthy Burger',120,2)">Add</button>
-</div>
-
-<div class="category">Snacks</div>
-
-<div class="card">
-<img src="katorichaat.jpg">
-<h3>Special Katori Chaat</h3>
-<p>₹200 / Piece (Min 10)</p>
-<button class="addBtn" onclick="addItem('Special Katori Chaat',200,10)">Add</button>
-</div>
-
-<div class="card">
-<img src="dahibhalle.jpg">
-<h3>Dahi Bhalle</h3>
-<p>₹175 / Plate (Min 5)</p>
-<button class="addBtn" onclick="addItem('Dahi Bhalle',175,5)">Add</button>
-</div>
-
-<div class="category">Main Course</div>
-
-<div class="card">
-<img src="palakpaneer.jpg">
-<h3>Palak Paneer</h3>
-<p>₹200 / Plate (Min 5)</p>
-<button class="addBtn" onclick="addItem('Palak Paneer',200,5)">Add</button>
-</div>
-
-<div class="card">
-<img src="daalbaatichurma.jpg">
-<h3>Daal Baati Churma</h3>
-<p>₹300 / Plate (Min 5)</p>
-<button class="addBtn" onclick="addItem('Daal Baati Churma',300,5)">Add</button>
-</div>
-
-<div class="category">Beverages</div>
-
-<div class="card">
-<img src="thandai.jpg">
-<h3>Banarasi Thandai</h3>
-<p>₹100 / Glass (Min 5)</p>
-<button class="addBtn" onclick="addItem('Banarasi Thandai',100,5)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80">
-<h3>Banarasi Tea</h3>
-<p>₹25 / Glass (Min 4)</p>
-<button class="addBtn" onclick="addItem('Banarasi Tea',25,4)">Add</button>
 </div>
 
 <div class="category">Sweets</div>
@@ -154,7 +92,7 @@ border:1px solid #ccc;
 <div class="card">
 <img src="./gujiya.jpg">
 <h3>Shuddh Desi Ghee Gujiya</h3>
-<p>₹800 / KG (Min 1)</p>
+<p>₹800 (Min 1 KG)</p>
 <button class="addBtn" onclick="addItem('Shuddh Desi Ghee Gujiya',800,1)">Add</button>
 </div>
 
@@ -163,11 +101,22 @@ border:1px solid #ccc;
 <div class="cart-btn" onclick="toggleCart()">🛒 Cart (0)</div>
 
 <div class="cart" id="cartBox">
-<h3>Order Summary</h3>
+
+<div class="cart-header">
+<h3 style="margin:0;">Order Summary</h3>
+<button onclick="minimizeCart()" id="minBtn" style="border:none;background:none;font-size:18px;cursor:pointer;">−</button>
+</div>
+
+<div id="cartContent">
+
 <div id="cartItems"></div>
 <strong>Total ₹ <span id="total">0</span></strong>
+
 <button class="action" onclick="openPayment()">Proceed to Payment</button>
 <button class="action secondary" onclick="clearCart()">Clear Cart</button>
+
+</div>
+
 </div>
 
 <div id="paymentModal">
@@ -178,9 +127,9 @@ border:1px solid #ccc;
 <textarea id="custAddress" placeholder="Full Delivery Address"></textarea>
 <hr>
 <h4>Scan & Pay</h4>
-<img src="upiscanner.jpg" " style="width:200px;border-radius:10px;">
+<img src="./scanner.jpg" onerror="this.src='./upi-qr.jpg'" style="width:200px;border-radius:10px;">
 <p>UPI ID: <strong>manshanticare-1@okaxis</strong></p>
-<button class="action" onclick="confirmOrder()">Confirm Payment & Download Invoice</button>
+<button class="action" onclick="confirmOrder()">Confirm & Download Invoice</button>
 <button class="action secondary" onclick="closePayment()">Cancel</button>
 </div>
 </div>
@@ -190,11 +139,13 @@ border:1px solid #ccc;
 <script>
 let cart={};
 let customerData=null;
+let minimized=false;
 
 function addItem(name,price,min){
 if(!cart[name]) cart[name]={price:price,qty:0,min:min};
 cart[name].qty+=min;
 updateCart();
+document.getElementById("cartBox").classList.add("open");
 }
 
 function updateCart(){
@@ -206,9 +157,9 @@ let amt=cart[item].qty*cart[item].price;
 total+=amt;count++;
 div.innerHTML+=`
 <div class="cart-item">
-${item} - ${cart[item].qty} = ₹${amt}
+${item}<br>₹${cart[item].price} × ${cart[item].qty} = ₹${amt}
 <div class="qty-controls">
-<button onclick="cart['${item}'].qty-=cart['${item}'].min;if(cart['${item}'].qty<=0) delete cart['${item}'];updateCart();">-</button>
+<button onclick="cart['${item}'].qty-=cart['${item}'].min;if(cart['${item}'].qty<=0) delete cart['${item}'];updateCart();">−</button>
 <button onclick="cart['${item}'].qty+=cart['${item}'].min;updateCart();">+</button>
 </div>
 </div>`;
@@ -220,8 +171,29 @@ document.querySelector(".cart-btn").innerText="🛒 Cart ("+count+")";
 
 function clearCart(){cart={};updateCart();}
 function toggleCart(){document.getElementById("cartBox").classList.toggle("open");}
-function openPayment(){if(Object.keys(cart).length===0){alert("Cart empty");return;}document.getElementById("paymentModal").style.display="flex";}
-function closePayment(){document.getElementById("paymentModal").style.display="none";}
+
+function minimizeCart(){
+let content=document.getElementById("cartContent");
+let btn=document.getElementById("minBtn");
+if(!minimized){
+content.style.display="none";
+btn.innerText="+";
+minimized=true;
+}else{
+content.style.display="block";
+btn.innerText="−";
+minimized=false;
+}
+}
+
+function openPayment(){
+if(Object.keys(cart).length===0){alert("Cart empty");return;}
+document.getElementById("paymentModal").style.display="flex";
+}
+
+function closePayment(){
+document.getElementById("paymentModal").style.display="none";
+}
 
 function confirmOrder(){
 let name=document.getElementById("custName").value.trim();
