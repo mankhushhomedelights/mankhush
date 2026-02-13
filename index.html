@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mankhush Home Delights</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -18,7 +19,6 @@ header p{margin:4px 0;font-size:13px}
 .card img{width:100%;height:120px;object-fit:cover;border-radius:8px}
 .card h3{margin:6px 0 2px;font-size:14px}
 .card p{margin:0;font-size:12px}
-
 button.addBtn{margin-top:6px;padding:6px 10px;border:none;border-radius:6px;background:#ff6b00;color:#fff;cursor:pointer;font-size:12px}
 
 .cart-btn{position:fixed;bottom:15px;right:15px;background:#ff6b00;color:#fff;padding:10px 18px;border-radius:25px;cursor:pointer;font-weight:500}
@@ -26,10 +26,9 @@ button.addBtn{margin-top:6px;padding:6px 10px;border:none;border-radius:6px;back
 .cart{position:fixed;bottom:70px;right:15px;width:95%;max-width:400px;max-height:75vh;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:15px;overflow:auto;display:none}
 .cart.open{display:block}
 
-.cart-header{display:flex;justify-content:space-between;align-items:center}
 .cart-item{border-bottom:1px solid #eee;padding:6px 0;font-size:13px}
 .qty-controls{display:flex;gap:6px;align-items:center;margin-top:4px}
-.qty-controls button{width:24px;height:24px;border:none;border-radius:4px;background:#ff6b00;color:#fff;cursor:pointer;font-size:14px}
+.qty-controls button{width:24px;height:24px;border:none;border-radius:4px;background:#ff6b00;color:#fff;cursor:pointer}
 
 button.action{width:100%;margin-top:8px;padding:8px;border:none;border-radius:8px;background:#ff6b00;color:#fff;cursor:pointer;font-size:13px}
 button.secondary{background:#999}
@@ -51,6 +50,13 @@ width:95%;
 max-width:400px;
 text-align:center;
 }
+input,textarea{
+width:100%;
+padding:8px;
+margin:6px 0;
+border-radius:6px;
+border:1px solid #ccc;
+}
 </style>
 </head>
 
@@ -60,96 +66,16 @@ text-align:center;
 <h1>Mankhush Home Delights</h1>
 <p>Pure Veg Banarasi Taste</p>
 <p>By Shivangi Srivastava</p>
-<p>Please give 1 day advance order.</p>
 <p>Delivery charges extra as per actual Courier Charges.</p>
 </header>
 
 <div class="menu">
 
-<div class="category">Fast Food</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80">
-<h3>Veg Pizza with Cheese</h3>
-<p>₹175 / Piece<br><span class="small">Min 2 pieces</span></p>
-<button class="addBtn" onclick="addItem('Veg Pizza with Cheese',175,2)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=600&q=80">
-<h3>White Pasta</h3>
-<p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
-<button class="addBtn" onclick="addItem('White Pasta',150,2)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80">
-<h3>Veg Noodles</h3>
-<p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
-<button class="addBtn" onclick="addItem('Veg Noodles',150,2)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80">
-<h3>Healthy Burger</h3>
-<p>₹120 / Piece<br><span class="small">Min 2 pieces</span></p>
-<button class="addBtn" onclick="addItem('Healthy Burger',120,2)">Add</button>
-</div>
-
-<div class="category">Snacks</div>
-
-<div class="card">
-<img src="katorichaat.jpg">
-<h3>Special Katori Chaat</h3>
-<p>₹200 / Piece<br><span class="small">Min 10 pieces</span></p>
-<button class="addBtn" onclick="addItem('Katori Chaat',200,10)">Add</button>
-</div>
-
-<div class="card">
-<img src="dahibhalle.jpg">
-<h3>Dahi Bhalle</h3>
-<p>₹175 / Plate<br><span class="small">Min 5 plates</span></p>
-<button class="addBtn" onclick="addItem('Dahi Bhalle',175,5)">Add</button>
-</div>
-
-<div class="category">Main Course</div>
-
-<div class="card">
-<img src="palakpaneer.jpg">
-<h3>Palak Paneer</h3>
-<p>₹200 / Plate<br><span class="small">Min 5 plates</span></p>
-<button class="addBtn" onclick="addItem('Palak Paneer',200,5)">Add</button>
-</div>
-
-<div class="card">
-<img src="daalbaatichurma.jpg">
-<h3>Daal Baati Churma</h3>
-<p>₹300 / Plate<br><span class="small">Min 5 plates</span></p>
-<button class="addBtn" onclick="addItem('Daal Baati Churma',300,5)">Add</button>
-</div>
-
-<div class="category">Beverages</div>
-
-<div class="card">
-<img src="thandai.jpg">
-<h3>Banarasi Thandai</h3>
-<p>₹100 / Glass<br><span class="small">Min 5 glasses</span></p>
-<button class="addBtn" onclick="addItem('Thandai',100,5)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80">
-<h3>Banarasi Tea</h3>
-<p>₹25 / Glass<br><span class="small">Min 4 glasses</span></p>
-<button class="addBtn" onclick="addItem('Banarasi Tea',25,4)">Add</button>
-</div>
-
 <div class="category">Sweets</div>
-
 <div class="card">
 <img src="./gujiya.jpg">
 <h3>Shuddh Desi Ghee Gujiya</h3>
-<p>₹800 / KG<br><span class="small">Min 1 KG</span></p>
+<p>₹800 / KG (Min 1 KG)</p>
 <button class="addBtn" onclick="addItem('Shuddh Desi Ghee Gujiya',800,1)">Add</button>
 </div>
 
@@ -158,32 +84,36 @@ text-align:center;
 <div class="cart-btn" onclick="toggleCart()">🛒 Cart (0)</div>
 
 <div class="cart" id="cartBox">
-<div class="cart-header">
 <h3>Order Summary</h3>
-<button onclick="toggleCart()">−</button>
-</div>
-
 <div id="cartItems"></div>
 <strong>Total ₹ <span id="total">0</span></strong>
-
-<button class="action" onclick="downloadInvoice()">Download Invoice</button>
-<button class="action" onclick="openPayment()">Pay & Confirm Order</button>
+<button class="action" onclick="openPayment()">Proceed to Payment</button>
 <button class="action secondary" onclick="clearCart()">Clear Cart</button>
 </div>
 
 <div id="paymentModal">
 <div class="payment-box">
-<h3>Complete UPI Payment</h3>
 
-<img src="upiscanner.jpg"
+<h3>Customer Details</h3>
+
+<input type="text" id="custName" placeholder="Full Name" required>
+<input type="tel" id="custMobile" placeholder="Mobile Number" required>
+<textarea id="custAddress" placeholder="Full Delivery Address" required></textarea>
+
+<hr>
+
+<h4>Scan & Pay</h4>
+
+<img src="./scanner.jpg"
+onerror="this.onerror=null;this.src='./upi-qr.jpg';"
 style="width:200px;border-radius:10px;margin-bottom:10px;">
 
-<p><strong>Scan & Pay</strong></p>
 <p>UPI ID: <strong>manshanticare-1@okaxis</strong></p>
-<p class="small">After payment click 'I Have Paid' and attach screenshot in WhatsApp.</p>
+<p class="small">After payment click Confirm.</p>
 
-<button class="action" onclick="confirmPayment()">I Have Paid</button>
+<button class="action" onclick="confirmOrder()">Confirm Payment & Download Invoice</button>
 <button class="action secondary" onclick="closePayment()">Cancel</button>
+
 </div>
 </div>
 
@@ -191,102 +121,63 @@ style="width:200px;border-radius:10px;margin-bottom:10px;">
 
 <script>
 let cart={};
-
-window.onload=function(){
-let saved=localStorage.getItem("cartData");
-if(saved){cart=JSON.parse(saved);updateCart();}
-};
+let customerData=null;
 
 function addItem(name,price,min){
 if(!cart[name]) cart[name]={price:price,qty:0,min:min};
 cart[name].qty+=min;
 updateCart();
-document.getElementById("cartBox").classList.add("open");
 }
-
-function increaseQty(name){cart[name].qty+=cart[name].min;updateCart();}
-function decreaseQty(name){cart[name].qty-=cart[name].min;if(cart[name].qty<=0) delete cart[name];updateCart();}
-function removeItem(name){delete cart[name];updateCart();}
-function clearCart(){cart={};updateCart();}
 
 function updateCart(){
 let div=document.getElementById("cartItems");
-let totalEl=document.getElementById("total");
-let btn=document.querySelector(".cart-btn");
-div.innerHTML="";
 let total=0,count=0;
+div.innerHTML="";
 
 for(let item in cart){
 let amt=cart[item].qty*cart[item].price;
 total+=amt;count++;
-div.innerHTML+=`
-<div class="cart-item">
-<strong>${item}</strong>
-<div class="qty-controls">
-<button onclick="decreaseQty('${item}')">−</button>
-<span>${cart[item].qty}</span>
-<button onclick="increaseQty('${item}')">+</button>
-<button onclick="removeItem('${item}')">x</button>
-</div>
-<span>₹${amt}</span>
-</div>`;
+div.innerHTML+=`<div class="cart-item">${item} - ${cart[item].qty} = ₹${amt}</div>`;
 }
 
-if(count===0) div.innerHTML="<p class='small'>Cart is empty</p>";
-totalEl.innerText=total;
-btn.innerText="🛒 Cart ("+count+")";
-
-localStorage.setItem("cartData",JSON.stringify(cart));
+if(count===0) div.innerHTML="<p class='small'>Cart empty</p>";
+document.getElementById("total").innerText=total;
+document.querySelector(".cart-btn").innerText="🛒 Cart ("+count+")";
 }
 
+function clearCart(){cart={};updateCart();}
 function toggleCart(){document.getElementById("cartBox").classList.toggle("open");}
+
 function openPayment(){
-
-
-if(Object.keys(cart).length===0){
-alert("Cart is empty");
-return;
-}
+if(Object.keys(cart).length===0){alert("Cart empty");return;}
 document.getElementById("paymentModal").style.display="flex";
-
 }
 
 function closePayment(){document.getElementById("paymentModal").style.display="none";}
 
-function confirmPayment(){
-let total=0;
-let msg="*Mankhush Home Delights - PAID ORDER*\n";
-msg+="--------------------------------\n";
-msg+="⚠ IMPORTANT: Please attach your UPI payment screenshot before sending this message.\n\n";
+function confirmOrder(){
 
-for(let item in cart){
-let amt=cart[item].qty*cart[item].price;
-total+=amt;
-msg+=`${item} - Qty: ${cart[item].qty} - ₹${amt}\n`;
+let name=document.getElementById("custName").value.trim();
+let mobile=document.getElementById("custMobile").value.trim();
+let address=document.getElementById("custAddress").value.trim();
+
+if(name===""||mobile===""||address===""){
+alert("Please fill all details.");
+return;
 }
 
-msg+="\n--------------------------------\n";
-msg+=`Total Paid: ₹${total}\n`;
-msg+="Payment Mode: UPI\n";
-msg+="Status: Payment Completed by Customer\n\n";
-msg+="Delivery charges extra as per actual Courier Charges.\n";
-msg+="Thank you 🙏";
+customerData={name,mobile,address};
 
-let url="https://wa.me/918209520964?text="+encodeURIComponent(msg);
-let newWindow=window.open(url,"_blank");
-if(!newWindow){alert("Please allow popups for this site.");}
+generateInvoice();
+sendWhatsApp();
 
 closePayment();
 }
 
-function downloadInvoice(){
+function generateInvoice(){
 
 const { jsPDF }=window.jspdf;
 const doc=new jsPDF();
-
-let name=document.getElementById("custName")?.value || "";
-let mobile=document.getElementById("custMobile")?.value || "";
-let address=document.getElementById("custAddress")?.value || "";
 
 let y=20,total=0;
 
@@ -294,27 +185,52 @@ doc.setFontSize(14);
 doc.text("Mankhush Home Delights",20,10);
 doc.setFontSize(10);
 
-doc.text("Customer Details:",20,y); y+=6;
-doc.text("Name: "+name,20,y); y+=6;
-doc.text("Mobile: "+mobile,20,y); y+=6;
-doc.text("Address: "+address,20,y); y+=10;
+doc.text("Customer:",20,y); y+=6;
+doc.text("Name: "+customerData.name,20,y); y+=6;
+doc.text("Mobile: "+customerData.mobile,20,y); y+=6;
+doc.text("Address: "+customerData.address,20,y); y+=10;
 
-doc.text("Order Details:",20,y); y+=6;
+doc.text("Order:",20,y); y+=6;
 
 for(let item in cart){
 let amt=cart[item].qty*cart[item].price;
 total+=amt;
-doc.text(`${item} - ${cart[item].qty} - ₹${amt}`,20,y);
+doc.text(item+" - "+cart[item].qty+" - ₹"+amt,20,y);
 y+=6;
 }
 
-y+=4;
-doc.text(`Total: ₹${total}`,20,y);
-doc.text("Delivery charges extra as per actual Courier Charges.",20,y+6);
+doc.text("Total: ₹"+total,20,y+6);
+doc.text("Delivery charges extra as per actual Courier Charges.",20,y+12);
 
 doc.save("Mankhush_Invoice.pdf");
 }
 
+function sendWhatsApp(){
+
+let total=0;
+let msg="*Mankhush Home Delights - PAID ORDER*\n\n";
+
+msg+="Customer Name: "+customerData.name+"\n";
+msg+="Mobile: "+customerData.mobile+"\n";
+msg+="Address: "+customerData.address+"\n\n";
+
+msg+="⚠ Please attach:\n";
+msg+="1. UPI Payment Screenshot\n";
+msg+="2. Invoice PDF\n\n";
+
+for(let item in cart){
+let amt=cart[item].qty*cart[item].price;
+total+=amt;
+msg+=item+" - "+cart[item].qty+" - ₹"+amt+"\n";
+}
+
+msg+="\nTotal Paid: ₹"+total+"\n";
+msg+="Delivery charges extra as per actual Courier Charges.\n";
+msg+="Thank you 🙏";
+
+let url="https://wa.me/918209520964?text="+encodeURIComponent(msg);
+window.open(url,"_blank");
+}
 </script>
 
 </body>
