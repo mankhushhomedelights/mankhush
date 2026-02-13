@@ -242,11 +242,10 @@ alert("Cart is empty");
 return;
 }
 
+let total=0;
 let msg="*Mankhush Home Delights - PAID ORDER*\n";
 msg+="--------------------------------\n";
 msg+="⚠ IMPORTANT: Please attach your UPI payment screenshot in this chat before sending this message.\n\n";
-
-let total=0;
 
 for(let item in cart){
 let amt=cart[item].qty*cart[item].price;
@@ -259,12 +258,15 @@ msg+=`Total Paid: ₹${total}\n`;
 msg+="Payment Mode: UPI\n";
 msg+="Status: Payment Completed by Customer\n\n";
 msg+="Delivery charges extra as per actual Courier Charges.\n";
-msg+="Thank you for ordering 🙏";
+msg+="Thank you 🙏";
 
-window.open("https://wa.me/918209520964?text="+encodeURIComponent(msg),"_blank");
+let phone="918209520964";
+let url="https://wa.me/"+phone+"?text="+encodeURIComponent(msg);
 
-alert("WhatsApp opened.\n\nPlease attach payment screenshot before sending.");
+/* THIS LINE FIXES POPUP BLOCK ISSUE */
+window.location.href = url;
 
+}
 closePayment();
 }
 
