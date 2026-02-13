@@ -241,9 +241,16 @@ localStorage.setItem("cartData",JSON.stringify(cart));
 
 function toggleCart(){document.getElementById("cartBox").classList.toggle("open");}
 function openPayment(){
-if(Object.keys(cart).length===0){alert("Cart is empty");return;}
-document.getElementById("paymentModal").style.display="flex";
+
+
+if(Object.keys(cart).length===0){
+alert("Cart is empty");
+return;
 }
+document.getElementById("paymentModal").style.display="flex";
+
+}
+
 function closePayment(){document.getElementById("paymentModal").style.display="none";}
 
 function confirmPayment(){
@@ -273,19 +280,41 @@ closePayment();
 }
 
 function downloadInvoice(){
+
 const { jsPDF }=window.jspdf;
 const doc=new jsPDF();
+
+let name=document.getElementById("custName")?.value || "";
+let mobile=document.getElementById("custMobile")?.value || "";
+let address=document.getElementById("custAddress")?.value || "";
+
 let y=20,total=0;
+
+doc.setFontSize(14);
 doc.text("Mankhush Home Delights",20,10);
+doc.setFontSize(10);
+
+doc.text("Customer Details:",20,y); y+=6;
+doc.text("Name: "+name,20,y); y+=6;
+doc.text("Mobile: "+mobile,20,y); y+=6;
+doc.text("Address: "+address,20,y); y+=10;
+
+doc.text("Order Details:",20,y); y+=6;
+
 for(let item in cart){
 let amt=cart[item].qty*cart[item].price;
 total+=amt;
 doc.text(`${item} - ${cart[item].qty} - ₹${amt}`,20,y);
-y+=8;
+y+=6;
 }
-doc.text(`Total: ₹${total}`,20,y+5);
+
+y+=4;
+doc.text(`Total: ₹${total}`,20,y);
+doc.text("Delivery charges extra as per actual Courier Charges.",20,y+6);
+
 doc.save("Mankhush_Invoice.pdf");
 }
+
 </script>
 
 </body>
