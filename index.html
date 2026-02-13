@@ -12,27 +12,131 @@ header{background:#ff6b00;color:#fff;text-align:center;padding:18px}
 header h1{margin:0;font-size:20px}
 header p{margin:4px 0;font-size:13px}
 
-.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:1000px;margin:auto}
-.category{grid-column:1/-1;color:#ff6b00;font-weight:600;margin-top:15px}
-.card{background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.1);padding:8px;text-align:center}
-.card img{width:100%;height:120px;object-fit:cover;border-radius:8px}
-.card h3{margin:6px 0 2px;font-size:14px}
-.card p{margin:0;font-size:12px}
-button.addBtn{margin-top:6px;padding:6px 10px;border:none;border-radius:6px;background:#ff6b00;color:#fff;cursor:pointer;font-size:12px}
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:12px;
+padding:12px;
+max-width:1100px;
+margin:auto;
+}
 
-.cart-btn{position:fixed;bottom:15px;right:15px;background:#ff6b00;color:#fff;padding:10px 18px;border-radius:25px;cursor:pointer;font-weight:500}
+.category{
+grid-column:1/-1;
+color:#ff6b00;
+font-weight:600;
+margin-top:18px;
+font-size:16px;
+}
 
-.cart{position:fixed;bottom:70px;right:15px;width:95%;max-width:400px;max-height:75vh;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.3);padding:15px;overflow:auto;display:none}
-.cart.open{display:block}
+.card{
+background:#fff;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,.1);
+padding:8px;
+text-align:center;
+}
 
-.cart-header{display:flex;justify-content:space-between;align-items:center}
-.cart-item{border-bottom:1px solid #eee;padding:6px 0;font-size:13px}
-.qty-controls{display:flex;gap:6px;margin-top:4px}
-.qty-controls button{width:24px;height:24px;border:none;border-radius:4px;background:#ff6b00;color:#fff;cursor:pointer}
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:8px;
+}
 
-button.action{width:100%;margin-top:8px;padding:8px;border:none;border-radius:8px;background:#ff6b00;color:#fff;cursor:pointer;font-size:13px}
-button.secondary{background:#999}
-.small{font-size:11px;color:#666}
+.card h3{
+margin:6px 0 2px;
+font-size:14px;
+}
+
+.card p{
+margin:0;
+font-size:12px;
+}
+
+button.addBtn{
+margin-top:6px;
+padding:6px 10px;
+border:none;
+border-radius:6px;
+background:#ff6b00;
+color:#fff;
+cursor:pointer;
+font-size:12px;
+}
+
+.cart-btn{
+position:fixed;
+bottom:15px;
+right:15px;
+background:#ff6b00;
+color:#fff;
+padding:10px 18px;
+border-radius:25px;
+cursor:pointer;
+font-weight:500;
+}
+
+.cart{
+position:fixed;
+bottom:70px;
+right:15px;
+width:95%;
+max-width:400px;
+max-height:75vh;
+background:#fff;
+border-radius:12px;
+box-shadow:0 2px 12px rgba(0,0,0,.3);
+padding:15px;
+overflow:auto;
+display:none;
+}
+
+.cart.open{display:block;}
+
+.cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.cart-item{
+border-bottom:1px solid #eee;
+padding:6px 0;
+font-size:13px;
+}
+
+.qty-controls{
+display:flex;
+gap:6px;
+margin-top:4px;
+}
+
+.qty-controls button{
+width:24px;
+height:24px;
+border:none;
+border-radius:4px;
+background:#ff6b00;
+color:#fff;
+cursor:pointer;
+}
+
+button.action{
+width:100%;
+margin-top:8px;
+padding:8px;
+border:none;
+border-radius:8px;
+background:#ff6b00;
+color:#fff;
+cursor:pointer;
+font-size:13px;
+}
+
+button.secondary{background:#999;}
+
+.small{font-size:11px;color:#666;}
 
 #paymentModal{
 display:none;
@@ -42,6 +146,7 @@ background:rgba(0,0,0,0.6);
 justify-content:center;
 align-items:center;
 }
+
 .payment-box{
 background:#fff;
 padding:20px;
@@ -50,6 +155,16 @@ width:95%;
 max-width:400px;
 text-align:center;
 }
+
+.payment-box img{
+width:240px;
+max-width:100%;
+height:auto;
+object-fit:contain;
+image-rendering:auto;
+margin-bottom:10px;
+}
+
 input,textarea{
 width:100%;
 padding:8px;
@@ -87,6 +202,68 @@ border:1px solid #ccc;
 <button class="addBtn" onclick="addItem('White Pasta',150,2)">Add</button>
 </div>
 
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80">
+<h3>Veg Noodles</h3>
+<p>₹150 (Min 2)</p>
+<button class="addBtn" onclick="addItem('Veg Noodles',150,2)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80">
+<h3>Healthy Burger</h3>
+<p>₹120 (Min 2)</p>
+<button class="addBtn" onclick="addItem('Healthy Burger',120,2)">Add</button>
+</div>
+
+<div class="category">Snacks</div>
+
+<div class="card">
+<img src="katorichaat.jpg">
+<h3>Special Katori Chaat</h3>
+<p>₹200 (Min 10)</p>
+<button class="addBtn" onclick="addItem('Special Katori Chaat',200,10)">Add</button>
+</div>
+
+<div class="card">
+<img src="dahibhalle.jpg">
+<h3>Dahi Bhalle</h3>
+<p>₹175 (Min 5)</p>
+<button class="addBtn" onclick="addItem('Dahi Bhalle',175,5)">Add</button>
+</div>
+
+<div class="category">Main Course</div>
+
+<div class="card">
+<img src="palakpaneer.jpg">
+<h3>Palak Paneer</h3>
+<p>₹200 (Min 5)</p>
+<button class="addBtn" onclick="addItem('Palak Paneer',200,5)">Add</button>
+</div>
+
+<div class="card">
+<img src="daalbaatichurma.jpg">
+<h3>Daal Baati Churma</h3>
+<p>₹300 (Min 5)</p>
+<button class="addBtn" onclick="addItem('Daal Baati Churma',300,5)">Add</button>
+</div>
+
+<div class="category">Beverages</div>
+
+<div class="card">
+<img src="thandai.jpg">
+<h3>Banarasi Thandai</h3>
+<p>₹100 (Min 5)</p>
+<button class="addBtn" onclick="addItem('Banarasi Thandai',100,5)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80">
+<h3>Banarasi Tea</h3>
+<p>₹25 (Min 4)</p>
+<button class="addBtn" onclick="addItem('Banarasi Tea',25,4)">Add</button>
+</div>
+
 <div class="category">Sweets</div>
 
 <div class="card">
@@ -101,44 +278,20 @@ border:1px solid #ccc;
 <div class="cart-btn" onclick="toggleCart()">🛒 Cart (0)</div>
 
 <div class="cart" id="cartBox">
-
 <div class="cart-header">
 <h3 style="margin:0;">Order Summary</h3>
 <button onclick="minimizeCart()" id="minBtn" style="border:none;background:none;font-size:18px;cursor:pointer;">−</button>
 </div>
-
 <div id="cartContent">
-
 <div id="cartItems"></div>
 <strong>Total ₹ <span id="total">0</span></strong>
-
 <button class="action" onclick="openPayment()">Proceed to Payment</button>
 <button class="action secondary" onclick="clearCart()">Clear Cart</button>
-
-</div>
-
-</div>
-
-<div id="paymentModal">
-<div class="payment-box">
-<h3>Customer Details</h3>
-<input type="text" id="custName" placeholder="Full Name">
-<input type="tel" id="custMobile" placeholder="Mobile Number">
-<textarea id="custAddress" placeholder="Full Delivery Address"></textarea>
-<hr>
-<h4>Scan & Pay</h4>
-<img src="./scanner.jpg" onerror="this.src='./upi-qr.jpg'" style="width:200px;border-radius:10px;">
-<p>UPI ID: <strong>manshanticare-1@okaxis</strong></p>
-<button class="action" onclick="confirmOrder()">Confirm & Download Invoice</button>
-<button class="action secondary" onclick="closePayment()">Cancel</button>
 </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 let cart={};
-let customerData=null;
 let minimized=false;
 
 function addItem(name,price,min){
@@ -155,88 +308,24 @@ div.innerHTML="";
 for(let item in cart){
 let amt=cart[item].qty*cart[item].price;
 total+=amt;count++;
-div.innerHTML+=`
-<div class="cart-item">
-${item}<br>₹${cart[item].price} × ${cart[item].qty} = ₹${amt}
+div.innerHTML+=`<div class="cart-item">${item}<br>₹${cart[item].price} × ${cart[item].qty} = ₹${amt}
 <div class="qty-controls">
 <button onclick="cart['${item}'].qty-=cart['${item}'].min;if(cart['${item}'].qty<=0) delete cart['${item}'];updateCart();">−</button>
 <button onclick="cart['${item}'].qty+=cart['${item}'].min;updateCart();">+</button>
-</div>
-</div>`;
+</div></div>`;
 }
 if(count===0) div.innerHTML="<p class='small'>Cart empty</p>";
 document.getElementById("total").innerText=total;
 document.querySelector(".cart-btn").innerText="🛒 Cart ("+count+")";
 }
 
-function clearCart(){cart={};updateCart();}
 function toggleCart(){document.getElementById("cartBox").classList.toggle("open");}
-
+function clearCart(){cart={};updateCart();}
 function minimizeCart(){
 let content=document.getElementById("cartContent");
 let btn=document.getElementById("minBtn");
-if(!minimized){
-content.style.display="none";
-btn.innerText="+";
-minimized=true;
-}else{
-content.style.display="block";
-btn.innerText="−";
-minimized=false;
-}
-}
-
-function openPayment(){
-if(Object.keys(cart).length===0){alert("Cart empty");return;}
-document.getElementById("paymentModal").style.display="flex";
-}
-
-function closePayment(){
-document.getElementById("paymentModal").style.display="none";
-}
-
-function confirmOrder(){
-let name=document.getElementById("custName").value.trim();
-let mobile=document.getElementById("custMobile").value.trim();
-let address=document.getElementById("custAddress").value.trim();
-if(!name||!mobile||!address){alert("Fill all details");return;}
-customerData={name,mobile,address};
-generateInvoice();
-sendWhatsApp();
-closePayment();
-}
-
-function generateInvoice(){
-const { jsPDF }=window.jspdf;
-const doc=new jsPDF();
-let y=20,total=0;
-doc.text("Mankhush Home Delights",20,10);
-doc.text("Customer: "+customerData.name,20,y);y+=6;
-doc.text("Mobile: "+customerData.mobile,20,y);y+=6;
-doc.text("Address: "+customerData.address,20,y);y+=10;
-for(let item in cart){
-let amt=cart[item].qty*cart[item].price;
-total+=amt;
-doc.text(item+" - "+cart[item].qty+" - ₹"+amt,20,y);y+=6;
-}
-doc.text("Total: ₹"+total,20,y+6);
-doc.save("Mankhush_Invoice.pdf");
-}
-
-function sendWhatsApp(){
-let total=0;
-let msg="*Mankhush Home Delights - PAID ORDER*\n\n";
-msg+="Customer: "+customerData.name+"\n";
-msg+="Mobile: "+customerData.mobile+"\n";
-msg+="Address: "+customerData.address+"\n\n";
-msg+="⚠ Attach UPI Screenshot & Invoice PDF\n\n";
-for(let item in cart){
-let amt=cart[item].qty*cart[item].price;
-total+=amt;
-msg+=item+" - "+cart[item].qty+" - ₹"+amt+"\n";
-}
-msg+="\nTotal Paid: ₹"+total;
-window.open("https://wa.me/918209520964?text="+encodeURIComponent(msg),"_blank");
+if(!minimized){content.style.display="none";btn.innerText="+";minimized=true;}
+else{content.style.display="block";btn.innerText="−";minimized=false;}
 }
 </script>
 
