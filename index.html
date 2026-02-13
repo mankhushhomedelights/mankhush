@@ -1,301 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mankhush Home Delights</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-body{margin:0;font-family:'Poppins',sans-serif;background:#fff7f0}
-header{background:#ff6b00;color:#fff;text-align:center;padding:18px}
-header h1{margin:0;font-size:20px}
-header p{margin:5px 0;font-size:13px}
-
-.menu{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-padding:12px;
-max-width:800px;
-margin:auto;
-}
-
-.category{
-grid-column:1/-1;
-color:#ff6b00;
-font-weight:600;
-margin:10px 0 0;
-}
-
-.card{
-background:#fff;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,.08);
-padding:8px;
-text-align:center;
-}
-
-.card img{
-width:100%;
-height:110px;
-object-fit:cover;
-border-radius:8px;
-}
-
-.card h3{
-margin:6px 0 2px;
-font-size:14px;
-}
-
-.card p{
-margin:0;
-font-size:12px;
-}
-
-.qty{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:6px;
-}
-
-.qty button{
-width:34px;
-height:34px;
-font-size:18px;
-border:none;
-border-radius:50%;
-background:#ff6b00;
-color:#fff;
-cursor:pointer;
-}
-
-.cart-btn{
-position:fixed;
-bottom:15px;
-right:15px;
-background:#ff6b00;
-color:#fff;
-padding:10px 16px;
-border-radius:25px;
-cursor:pointer;
-z-index:1000;
-}
-
-.cart{
-position:fixed;
-bottom:15px;
-right:15px;
-width:92%;
-max-width:350px;
-max-height:60vh;
-background:#fff;
-border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,.3);
-padding:12px;
-overflow:auto;
-display:none;
-z-index:1001;
-}
-
-.cart.open{display:block}
-
-.cart-item{
-display:flex;
-justify-content:space-between;
-font-size:13px;
-margin:6px 0;
-}
-
-.small{font-size:11px;color:#666}
-
-button.action{
-width:100%;
-margin-top:8px;
-padding:8px;
-border:none;
-border-radius:8px;
-background:#ff6b00;
-color:#fff;
-cursor:pointer;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<h1>Mankhush Home Delights</h1>
-<p>Pure Veg Banarasi Taste</p>
-<p>By Shivangi Srivastava</p>
-<p>Please give 1 day advance order.</p>
-<p>Delivery charges extra as per actual Courier Charges.</p>
-</header>
-
-<div class="menu">
-
-<div class="category">Snacks</div>
-
-<div class="card">
-<img src="katorichaat.jpg">
-<h3>Special Katori Chaat</h3>
-<p>₹200 / Piece<br><span class="small">Min 10 pieces</span></p>
-<div class="qty">
-<button onclick="removeItem('Katori Chaat')">−</button>
-<button onclick="addItem('Katori Chaat',200,10)">+</button>
-</div>
-</div>
-
-<div class="card">
-<img src="dahibhalle.jpg">
-<h3>Dahi Bhalle</h3>
-<p>₹175 / Plate<br><span class="small">Min 5 plates</span></p>
-<div class="qty">
-<button onclick="removeItem('Dahi Bhalle')">−</button>
-<button onclick="addItem('Dahi Bhalle',175,5)">+</button>
-</div>
-</div>
-
-<div class="category">Main Course</div>
-
-<div class="card">
-<img src="palakpaneer.jpg">
-<h3>Palak Paneer</h3>
-<p>₹200 / Plate<br><span class="small">Min 5 plates</span></p>
-<div class="qty">
-<button onclick="removeItem('Palak Paneer')">−</button>
-<button onclick="addItem('Palak Paneer',200,5)">+</button>
-</div>
-</div>
-
-<div class="card">
-<img src="daalbaatichurma.jpg">
-<h3>Daal Baati Churma</h3>
-<p>₹300 / Plate<br><span class="small">Min 5 plates</span></p>
-<div class="qty">
-<button onclick="removeItem('Daal Baati Churma')">−</button>
-<button onclick="addItem('Daal Baati Churma',300,5)">+</button>
-</div>
-</div>
-
-<div class="category">Fast Food</div>
-
-<div class="card">
-<img src="https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=600">
-<h3>Veg Pizza</h3>
-<p>₹175 / Piece<br><span class="small">Min 2 pieces</span></p>
-<div class="qty">
-<button onclick="removeItem('Veg Pizza')">−</button>
-<button onclick="addItem('Veg Pizza',175,2)">+</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=600">
-<h3>White Pasta</h3>
-<p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
-<div class="qty">
-<button onclick="removeItem('White Pasta')">−</button>
-<button onclick="addItem('White Pasta',150,2)">+</button>
-</div>
-</div>
-
-<div class="category">Beverages</div>
-
-<div class="card">
-<img src="thandai.jpg">
-<h3>Banarasi Thandai</h3>
-<p>₹100 / Glass<br><span class="small">Min 5 glasses</span></p>
-<div class="qty">
-<button onclick="removeItem('Thandai')">−</button>
-<button onclick="addItem('Thandai',100,5)">+</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80">
-<h3>Banarasi Tea</h3>
-<p>₹25 / Glass<br><span class="small">Min 4 glasses</span></p>
-<div class="qty">
-<button onclick="removeItem('Banarasi Tea')">−</button>
-<button onclick="addItem('Banarasi Tea',25,4)">+</button>
-</div>
-</div>
-
-<div class="category">Sweets</div>
-
-<div class="card">
-<img src="gujiya.jpg">
-<h3>Desi Ghee Gujiya</h3>
-<p>₹800 / KG<br><span class="small">Min 1 KG</span></p>
-<div class="qty">
-<button onclick="removeItem('Gujiya')">−</button>
-<button onclick="addItem('Gujiya',800,1)">+</button>
-</div>
-</div>
-
-</div>
-
-<div class="cart-btn" onclick="toggleCart()">🛒 Cart</div>
-
-<div class="cart" id="cartBox">
-<h3>Order Summary</h3>
-<div id="cartItems"></div>
-<strong>Total ₹ <span id="total">0</span></strong>
-<button class="action" onclick="sendWhatsApp()">Send Order on WhatsApp</button>
-</div>
-
 <script>
 let cart = {};
 
-function addItem(name, price, minQty){
-if(!cart[name]){
-cart[name] = {price:price, qty:minQty};
-}else{
-cart[name].qty += minQty;
-}
-renderCart();
-}
-
-function removeItem(name){
-if(cart[name]){
-delete cart[name];
-}
-renderCart();
+function addItem(name, price, minQty) {
+    if (!cart[name]) {
+        cart[name] = { price: price, qty: 0 };
+    }
+    cart[name].qty += minQty;
+    updateCart();
+    openCart();
 }
 
-function renderCart(){
-let html="";
-let total=0;
-for(let item in cart){
-let amt = cart[item].qty * cart[item].price;
-total += amt;
-html += `<div class="cart-item">
-<span>${item} (x${cart[item].qty})</span>
-<span>₹${amt}</span>
-</div>`;
-}
-document.getElementById("cartItems").innerHTML = html || "<p class='small'>Cart is empty</p>";
-document.getElementById("total").innerText = total;
+function removeItem(name) {
+    if (cart[name]) {
+        delete cart[name];
+    }
+    updateCart();
 }
 
-function toggleCart(){
-document.getElementById("cartBox").classList.toggle("open");
+function updateCart() {
+    const cartItemsDiv = document.getElementById("cartItems");
+    const totalSpan = document.getElementById("total");
+
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+    let itemCount = 0;
+
+    for (let item in cart) {
+        const itemTotal = cart[item].price * cart[item].qty;
+        total += itemTotal;
+        itemCount++;
+
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+            <span>${item} (x${cart[item].qty})</span>
+            <span>₹${itemTotal}</span>
+        `;
+        cartItemsDiv.appendChild(div);
+    }
+
+    if (itemCount === 0) {
+        cartItemsDiv.innerHTML = "<p class='small'>Cart is empty</p>";
+    }
+
+    totalSpan.innerText = total;
+    document.querySelector(".cart-btn").innerText = "🛒 Cart (" + itemCount + ")";
 }
 
-function sendWhatsApp(){
-let msg="Mankhush Home Delights Order:\n\n";
-let total=0;
-for(let item in cart){
-let amt = cart[item].qty * cart[item].price;
-total += amt;
-msg += `${item} - ${cart[item].qty} - ₹${amt}\n`;
+function openCart() {
+    document.getElementById("cartBox").classList.add("open");
 }
-msg += `\nTotal: ₹${total}\nDelivery charges extra as per actual Courier Charges.`;
-window.open("https://wa.me/918209520964?text="+encodeURIComponent(msg),"_blank");
+
+function toggleCart() {
+    document.getElementById("cartBox").classList.toggle("open");
+}
+
+function sendWhatsApp() {
+    if (Object.keys(cart).length === 0) {
+        alert("Cart is empty");
+        return;
+    }
+
+    let message = "Mankhush Home Delights Order\n\n";
+    let total = 0;
+
+    for (let item in cart) {
+        const itemTotal = cart[item].price * cart[item].qty;
+        total += itemTotal;
+        message += `${item} - Qty ${cart[item].qty} - ₹${itemTotal}\n`;
+    }
+
+    message += `\nTotal: ₹${total}`;
+    message += `\nDelivery charges extra as per actual Courier Charges.`;
+
+    window.open(
+        "https://wa.me/918209520964?text=" + encodeURIComponent(message),
+        "_blank"
+    );
 }
 </script>
-
-</body>
-</html>
