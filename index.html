@@ -106,7 +106,44 @@ button.clear{background:#999}
 </div>
 
 <div class="cart-btn" onclick="openCart()">🛒 Cart</div>
+<div class="card">
+  <img src="https://source.unsplash.com/400x400/?veg-pizza">
+  <h3>Veg Pizza with Cheese</h3>
+  <p>₹175 / Piece<br><span class="small">Min 2 pieces</span></p>
+  <div class="qty">
+    <button onclick="removeItem('Veg Pizza')">−</button>
+    <button onclick="addItem('Veg Pizza',175,2)">+</button>
+  </div>
+</div>
 
+<div class="card">
+  <img src="https://source.unsplash.com/400x400/?white-sauce-pasta">
+  <h3>White Sauce Pasta</h3>
+  <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
+  <div class="qty">
+    <button onclick="removeItem('White Pasta')">−</button>
+    <button onclick="addItem('White Pasta',150,2)">+</button>
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://source.unsplash.com/400x400/?veg-noodles">
+  <h3>Veg Noodles</h3>
+  <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
+  <div class="qty">
+    <button onclick="removeItem('Veg Noodles')">−</button>
+    <button onclick="addItem('Veg Noodles',150,2)">+</button>
+  </div>
+</div>
+<div class="card">
+  <img src="https://source.unsplash.com/400x400/?vegetable-burger">
+  <h3>Healthy Veg Burger</h3>
+  <p>₹120 / Piece<br><span class="small">Min 2 pieces</span></p>
+  <div class="qty">
+    <button onclick="removeItem('Veg Burger')">−</button>
+    <button onclick="addItem('Veg Burger',120,2)">+</button>
+  </div>
+</div>
 <div class="cart" id="cart">
   <div class="cart-header">
     <h3>Order Summary</h3>
