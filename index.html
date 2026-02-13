@@ -236,17 +236,18 @@ document.getElementById("paymentModal").style.display="flex";
 function closePayment(){document.getElementById("paymentModal").style.display="none";}
 
 function confirmPayment(){
-let file=document.getElementById("paymentProof");
-if(file.files.length===0){
-alert("Please upload payment screenshot.");
+
+if(Object.keys(cart).length===0){
+alert("Cart is empty");
 return;
 }
 
 let msg="*Mankhush Home Delights - PAID ORDER*\n";
 msg+="--------------------------------\n";
-msg+="⚠ Please attach your UPI payment screenshot before sending this message.\n\n";
+msg+="⚠ IMPORTANT: Please attach your UPI payment screenshot in this chat before sending this message.\n\n";
 
 let total=0;
+
 for(let item in cart){
 let amt=cart[item].qty*cart[item].price;
 total+=amt;
@@ -256,15 +257,17 @@ msg+=`${item} - Qty: ${cart[item].qty} - ₹${amt}\n`;
 msg+="\n--------------------------------\n";
 msg+=`Total Paid: ₹${total}\n`;
 msg+="Payment Mode: UPI\n";
-msg+="Status: Paid by Customer\n\n";
+msg+="Status: Payment Completed by Customer\n\n";
 msg+="Delivery charges extra as per actual Courier Charges.\n";
-msg+="Thank you 🙏";
+msg+="Thank you for ordering 🙏";
 
 window.open("https://wa.me/918209520964?text="+encodeURIComponent(msg),"_blank");
 
-alert("WhatsApp opened.\nAttach payment screenshot before sending.");
+alert("WhatsApp opened.\n\nPlease attach payment screenshot before sending.");
 
 closePayment();
+}
+
 }
 
 function downloadInvoice(){
