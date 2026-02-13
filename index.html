@@ -43,27 +43,8 @@ button.clear{background:#999}
 
 <div class="menu">
 
-<!-- Existing Items -->
-
-<div class="card">
-<img src="gujiya.jpg">
-<h3>Desi Ghee Gujiya</h3>
-<p>₹800 / KG<br><span class="small">Min 1 KG</span></p>
-<div class="qty">
-<button onclick="removeItem('Gujiya')">−</button>
-<button onclick="addItem('Gujiya',800,1)">+</button>
-</div>
-</div>
-
-<div class="card">
-<img src="thandai.jpg">
-<h3>Premium Holi Thandai</h3>
-<p>₹100 / Glass<br><span class="small">Min 5 glasses</span></p>
-<div class="qty">
-<button onclick="removeItem('Thandai')">−</button>
-<button onclick="addItem('Thandai',100,5)">+</button>
-</div>
-</div>
+<!-- SNACKS -->
+<h2 style="grid-column:1/-1;color:#ff6b00;margin:10px 0 0;">Snacks</h2>
 
 <div class="card">
 <img src="katorichaat.jpg">
@@ -85,15 +66,8 @@ button.clear{background:#999}
 </div>
 </div>
 
-<div class="card">
-<img src="daalbaatichurma.jpg">
-<h3>Daal Baati Churma</h3>
-<p>₹300 / Plate<br><span class="small">Min 5 plates</span></p>
-<div class="qty">
-<button onclick="removeItem('Daal Baati Churma')">−</button>
-<button onclick="addItem('Daal Baati Churma',300,5)">+</button>
-</div>
-</div>
+<!-- MAIN COURSE -->
+<h2 style="grid-column:1/-1;color:#ff6b00;margin:15px 0 0;">Main Course</h2>
 
 <div class="card">
 <img src="palakpaneer.jpg">
@@ -105,11 +79,22 @@ button.clear{background:#999}
 </div>
 </div>
 
-<!-- NEW ITEMS ADDED -->
+<div class="card">
+<img src="daalbaatichurma.jpg">
+<h3>Daal Baati Churma</h3>
+<p>₹300 / Plate<br><span class="small">Min 5 plates</span></p>
+<div class="qty">
+<button onclick="removeItem('Daal Baati Churma')">−</button>
+<button onclick="addItem('Daal Baati Churma',300,5)">+</button>
+</div>
+</div>
+
+<!-- FAST FOOD (NEW SECTION) -->
+<h2 style="grid-column:1/-1;color:#ff6b00;margin:15px 0 0;">Fast Food</h2>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1601924582975-7e91b89b0b8f?auto=format&fit=crop&w=600&q=80">
-<h3>Veg Pizza with Cheese</h3>
+<h3>Veg Pizza with Cheese <span style="color:#e63946;font-size:11px;">NEW</span></h3>
 <p>₹175 / Piece<br><span class="small">Min 2 pieces</span></p>
 <div class="qty">
 <button onclick="removeItem('Veg Pizza')">−</button>
@@ -119,7 +104,7 @@ button.clear{background:#999}
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?auto=format&fit=crop&w=600&q=80">
-<h3>White Pasta</h3>
+<h3>White Pasta <span style="color:#e63946;font-size:11px;">NEW</span></h3>
 <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
 <div class="qty">
 <button onclick="removeItem('White Pasta')">−</button>
@@ -129,7 +114,7 @@ button.clear{background:#999}
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80">
-<h3>Veg Noodles</h3>
+<h3>Veg Noodles <span style="color:#e63946;font-size:11px;">NEW</span></h3>
 <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
 <div class="qty">
 <button onclick="removeItem('Veg Noodles')">−</button>
@@ -139,11 +124,42 @@ button.clear{background:#999}
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80">
-<h3>Healthy Veg Burger</h3>
+<h3>Healthy Veg Burger <span style="color:#e63946;font-size:11px;">NEW</span></h3>
 <p>₹120 / Piece<br><span class="small">Min 2 pieces</span></p>
 <div class="qty">
 <button onclick="removeItem('Veg Burger')">−</button>
 <button onclick="addItem('Veg Burger',120,2)">+</button>
+</div>
+</div>
+
+<!-- BEVERAGES -->
+<h2 style="grid-column:1/-1;color:#ff6b00;margin:15px 0 0;">Beverages</h2>
+
+<div class="card">
+<img src="thandai.jpg">
+<h3>Premium Banarasi Thandai</h3>
+<p>₹100 / Glass<br><span class="small">Min 5 glasses</span></p>
+<div class="qty">
+<button onclick="removeItem('Thandai')">−</button>
+<button onclick="addItem('Thandai',100,5)">+</button>
+</div>
+</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80">
+<h3>Banarasi Tea</h3>
+<p>₹25 / Glass<br><span class="small">Min 4 glasses</span></p>
+<div class="qty">
+<button onclick="removeItem('Banarasi Tea')">−</button>
+<button onclick="addItem('Banarasi Tea',25,4)">+</button>
+</div>
+</div>
+<div class="card">
+<img src="gujiya.jpg">
+<h3>Desi Ghee Gujiya</h3>
+<p>₹800 / KG<br><span class="small">Min 1 KG</span></p>
+<div class="qty">
+<button onclick="removeItem('Gujiya')">−</button>
+<button onclick="addItem('Gujiya',800,1)">+</button>
 </div>
 </div>
 
