@@ -13,7 +13,12 @@ header p{margin:4px 0 0;font-size:13px}
 
 .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:12px;max-width:760px;margin:auto}
 .card{background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:8px;text-align:center}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;max-height:110px}
+.card img{
+    width:100%;
+    height:110px;
+    object-fit:cover;
+    border-radius:8px;
+}
 .card h3{margin:6px 0 2px;font-size:14px}
 .card p{margin:0;font-size:12px}
 .qty{display:flex;justify-content:center;gap:10px;margin-top:6px}
@@ -105,9 +110,8 @@ button.clear{background:#999}
   </div>
 </div>
 
-<div class="cart-btn" onclick="openCart()">🛒 Cart</div>
 <div class="card">
-  <img src="https://source.unsplash.com/400x400/?veg-pizza">
+  <img src="https://images.unsplash.com/photo-1601924582975-7e91b89b0b8f?auto=format&fit=crop&w=600&q=80">
   <h3>Veg Pizza with Cheese</h3>
   <p>₹175 / Piece<br><span class="small">Min 2 pieces</span></p>
   <div class="qty">
@@ -117,7 +121,7 @@ button.clear{background:#999}
 </div>
 
 <div class="card">
-  <img src="https://source.unsplash.com/400x400/?white-sauce-pasta">
+  <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?auto=format&fit=crop&w=600&q=80">
   <h3>White Sauce Pasta</h3>
   <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
   <div class="qty">
@@ -125,9 +129,8 @@ button.clear{background:#999}
     <button onclick="addItem('White Pasta',150,2)">+</button>
   </div>
 </div>
-
 <div class="card">
-  <img src="https://source.unsplash.com/400x400/?veg-noodles">
+  <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80">
   <h3>Veg Noodles</h3>
   <p>₹150 / Plate<br><span class="small">Min 2 plates</span></p>
   <div class="qty">
@@ -135,8 +138,9 @@ button.clear{background:#999}
     <button onclick="addItem('Veg Noodles',150,2)">+</button>
   </div>
 </div>
+
 <div class="card">
-  <img src="https://source.unsplash.com/400x400/?vegetable-burger">
+  <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80">
   <h3>Healthy Veg Burger</h3>
   <p>₹120 / Piece<br><span class="small">Min 2 pieces</span></p>
   <div class="qty">
