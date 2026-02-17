@@ -43,6 +43,26 @@ header p{margin:4px 0;font-size:13px}
 #paymentModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);justify-content:center;align-items:center}
 .payment-box{background:#fff;padding:20px;border-radius:12px;width:95%;max-width:380px;text-align:center}
 .payment-box img{width:200px;height:auto;border-radius:10px;margin:10px 0}
+#zomatoModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;
+  align-items:center
+}
+  function openZomato(){
+  if(Object.keys(cart).length==0) return alert("Cart empty");
+  document.getElementById("zomatoModal").style.display="flex";
+}
+function closeZomato(){
+  document.getElementById("zomatoModal").style.display="none";
+}
+
+function goZomato(){
+  window.open("https://www.zomato.com/durg-bhilai/mankhush-home-delights-nehru-nagar/order", "_blank");
+}
+
 </style>
 </head>
 
@@ -185,6 +205,7 @@ header p{margin:4px 0;font-size:13px}
 <strong>Total ₹ <span id="total">0</span></strong>
 <button class="action" onclick="downloadInvoice()">Download Invoice</button>
 <button class="action" onclick="openPayment()">Pay & Confirm</button>
+  <button class="action" onclick="openZomato()">Order via Zomato</button>
 <button class="action secondary" onclick="clearCart()">Clear Cart</button>
 </div>
 
